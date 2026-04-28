@@ -32,6 +32,8 @@ export default function Summary() {
 
 
   return (
+    <>
+    <PageLoader show={loading} label="Opening payment…" />
     <section className="container py-16 md:py-24">
       <SectionTitle eyebrow="Final Step" title="Booking Summary" subtitle="Review your selections and confirm via WhatsApp." />
 
