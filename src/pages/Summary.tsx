@@ -56,6 +56,21 @@ export default function Summary() {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.text("Booking Summary", 50, y);
+
+    // Pending status badge (top-right)
+    const badgeW = 90;
+    const badgeH = 24;
+    const badgeX = pageW - 50 - badgeW;
+    const badgeY = y - 18;
+    doc.setFillColor(255, 243, 205);
+    doc.setDrawColor(245, 158, 11);
+    doc.setLineWidth(0.8);
+    doc.roundedRect(badgeX, badgeY, badgeW, badgeH, 12, 12, "FD");
+    doc.setTextColor(146, 64, 14);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.text("STATUS: PENDING", badgeX + badgeW / 2, badgeY + 16, { align: "center" });
+
     y += 10;
     doc.setDrawColor(212, 175, 55);
     doc.setLineWidth(1.5);
