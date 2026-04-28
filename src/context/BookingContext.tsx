@@ -35,6 +35,7 @@ const initial: BookingState = {
   decoration: [],
   catering: { meal: null, guests: 100 },
   addons: [],
+  extras: [],
   ebUnits: 0,
   gasKg: 0,
 };
