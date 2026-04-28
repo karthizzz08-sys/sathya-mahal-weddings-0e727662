@@ -87,5 +87,6 @@ export default function Summary() {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
