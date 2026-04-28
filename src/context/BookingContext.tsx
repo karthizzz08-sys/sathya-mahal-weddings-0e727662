@@ -12,6 +12,7 @@ export interface BookingState {
   decoration: SelectedItem[];
   catering: { meal: SelectedItem | null; guests: number };
   addons: SelectedItem[];
+  extras: SelectedItem[];
   ebUnits: number;
   gasKg: number;
 }
@@ -19,7 +20,7 @@ export interface BookingState {
 interface Ctx {
   state: BookingState;
   set: <K extends keyof BookingState>(k: K, v: BookingState[K]) => void;
-  toggleItem: (key: "decoration" | "addons", item: SelectedItem) => void;
+  toggleItem: (key: "decoration" | "addons" | "extras", item: SelectedItem) => void;
   total: number;
   reset: () => void;
 }
