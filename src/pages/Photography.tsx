@@ -4,6 +4,8 @@ import { Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
+import { useTransitionNav } from "@/hooks/useTransitionNav";
+import PageLoader from "@/components/PageLoader";
 import photoImg from "@/assets/photography.jpg";
 
 const packages = [
