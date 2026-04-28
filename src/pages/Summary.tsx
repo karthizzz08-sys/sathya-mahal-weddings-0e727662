@@ -85,14 +85,12 @@ export default function Summary() {
               <p className="text-xs uppercase tracking-[0.4em] opacity-70 mb-2">Final Total</p>
               <p className="font-serif text-5xl">₹{total.toLocaleString()}</p>
             </div>
-            <a
-              href={`https://wa.me/919999999999?text=${buildMessage()}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#25D366] hover:bg-[#20bd5a] transition-colors text-white px-6 py-4 rounded-full flex items-center gap-2 font-medium shadow-soft"
+            <Button
+              onClick={proceed}
+              className="bg-gradient-gold text-primary-foreground hover:opacity-90 px-6 py-6 rounded-full flex items-center gap-2 font-medium shadow-soft h-auto"
             >
-              <MessageCircle className="h-5 w-5" /> Confirm Booking
-            </a>
+              <CreditCard className="h-5 w-5" /> Confirm Booking
+            </Button>
           </div>
         </motion.div>
       </div>
