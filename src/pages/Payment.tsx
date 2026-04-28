@@ -1,7 +1,9 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Upload, CheckCircle2, MessageCircle, ImageIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
@@ -16,6 +18,7 @@ export default function Payment() {
   const { state, total } = useBooking();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { loading, go } = useTransitionNav(900);
 
@@ -44,6 +47,10 @@ export default function Payment() {
   const sendToWhatsApp = () => {
     if (!file) {
       toast.error("Please upload your payment screenshot first");
+      return;
+    }
+    if (!termsAccepted) {
+      toast.error("Please accept the Terms & Conditions");
       return;
     }
     const url = `https://wa.me/${OWNER_WHATSAPP}?text=${buildMessage()}`;
@@ -142,12 +149,38 @@ export default function Payment() {
 
             <Button
               onClick={sendToWhatsApp}
-              disabled={!file}
+              disabled={!file || !termsAccepted}
               className="w-full mt-6 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-base font-medium shadow-gold disabled:opacity-50"
             >
               <MessageCircle className="h-5 w-5 mr-2" />
               Send to WhatsApp & Confirm
             </Button>
+
+            {/* Terms & Conditions Checkbox */}
+            <div className="mt-6 p-4 rounded-xl bg-amber-50 border border-amber-200">
+              <div className="flex gap-3 items-start">
+                <Checkbox
+                  id="terms-payment"
+                  checked={termsAccepted}
+                  onCheckedChange={() => setTermsAccepted(!termsAccepted)}
+                  className="w-5 h-5 mt-0.5 border-2 border-amber-300 rounded accent-amber-600"
+                />
+                <label htmlFor="terms-payment" className="flex-1 cursor-pointer">
+                  <span className="text-sm font-medium text-gray-800">
+                    I agree to the{" "}
+                    <Link
+                      to="/terms"
+                      className="text-amber-700 font-semibold hover:text-amber-800 underline"
+                    >
+                      Terms & Conditions
+                    </Link>
+                  </span>
+                  <p className="text-xs text-gray-600 mt-1">
+                    You must read and accept our terms before confirming your booking
+                  </p>
+                </label>
+              </div>
+            </div>
             <p className="text-[11px] text-center text-muted-foreground mt-3">
               You'll be redirected to WhatsApp. Please attach the same screenshot in the chat to complete confirmation.
             </p>
