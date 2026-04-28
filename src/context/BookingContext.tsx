@@ -46,7 +46,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
   const [state, setState] = useState<BookingState>(initial);
   const set = <K extends keyof BookingState>(k: K, v: BookingState[K]) =>
     setState(s => ({ ...s, [k]: v }));
-  const toggleItem = (key: "decoration" | "addons", item: SelectedItem) => {
+  const toggleItem = (key: "decoration" | "addons" | "extras", item: SelectedItem) => {
     setState(s => {
       const list = s[key];
       const exists = list.find(i => i.id === item.id);
@@ -59,6 +59,7 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     state.decoration.reduce((a, b) => a + b.price, 0) +
     (state.catering.meal ? state.catering.meal.price * state.catering.guests : 0) +
     state.addons.reduce((a, b) => a + b.price, 0) +
+    state.extras.reduce((a, b) => a + b.price, 0) +
     state.ebUnits * 30 +
     state.gasKg * 220;
 
