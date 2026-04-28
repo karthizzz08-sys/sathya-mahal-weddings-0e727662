@@ -30,16 +30,6 @@ export default function Summary() {
   if (state.ebUnits) lines.push({ label: "EB Units", value: `${state.ebUnits} × ₹30 = ₹${(state.ebUnits * 30).toLocaleString()}` });
   if (state.gasKg) lines.push({ label: "Gas", value: `${state.gasKg}kg × ₹220 = ₹${(state.gasKg * 220).toLocaleString()}` });
 
-  const buildMessage = () => {
-    const services = [
-      state.plan?.name,
-      state.photography?.name,
-      ...state.decoration.map(d => d.name),
-      state.catering.meal && `${state.catering.meal.name} (${state.catering.guests} guests)`,
-      ...state.addons.map(a => a.name),
-    ].filter(Boolean).join(", ");
-    return `Hello, I want to book Sathya Mahal%0A%0AName: ${state.customerName || "-"}%0ADate: ${state.date ? state.date.toDateString() : "-"}%0APlan: ${state.plan?.name || "-"}%0AServices Selected: ${services || "-"}%0ATotal Cost: ₹${total.toLocaleString()}`;
-  };
 
   return (
     <section className="container py-16 md:py-24">
