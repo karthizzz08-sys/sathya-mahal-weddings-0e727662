@@ -8,10 +8,10 @@ import PageLoader from "@/components/PageLoader";
 import { toast } from "sonner";
 
 const extras = [
-  { icon: Zap, label: "Electricity (EB)", price: "₹30", unit: "/ unit" },
-  { icon: Sparkles, label: "Cleaning Charges", price: "₹5,000", unit: "flat" },
-  { icon: Flame, label: "Gas Charges", price: "₹220", unit: "/ kg" },
-  { icon: Power, label: "Generator", price: "₹2,500", unit: "/ hr" },
+  { id: "eb", icon: Zap, label: "Electricity (EB)", price: 30, display: "₹30", unit: "/ unit" },
+  { id: "cleaning", icon: Sparkles, label: "Cleaning Charges", price: 5000, display: "₹5,000", unit: "flat" },
+  { id: "gas", icon: Flame, label: "Gas Charges", price: 220, display: "₹220", unit: "/ kg" },
+  { id: "generator", icon: Power, label: "Generator", price: 2500, display: "₹2,500", unit: "/ hr" },
 ];
 
 const plans = [
