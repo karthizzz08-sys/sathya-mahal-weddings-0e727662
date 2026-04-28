@@ -24,8 +24,14 @@ const plans = [
 ];
 
 export default function Plans() {
-  const { state, set } = useBooking();
+  const { state, set, toggleItem } = useBooking();
   const { loading, go } = useTransitionNav(700);
+
+  const isExtraSelected = (id: string) => state.extras.some(e => e.id === id);
+  const toggleExtra = (e: typeof extras[number]) => {
+    toggleItem("extras", { id: e.id, name: `${e.label} (${e.display} ${e.unit})`, price: e.price });
+    toast.success(isExtraSelected(e.id) ? `${e.label} removed` : `${e.label} added`);
+  };
 
   const select = (p: typeof plans[number]) => {
     toast.success(`${p.name} selected`);
