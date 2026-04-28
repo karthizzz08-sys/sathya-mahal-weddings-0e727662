@@ -76,10 +76,11 @@ export default function Catering() {
           <span className="text-sm uppercase tracking-widest opacity-80">Catering Total</span>
           <span className="font-serif text-3xl">₹{total.toLocaleString()}</span>
         </div>
-        <Button onClick={() => navigate("/addons")} className="w-full mt-6 rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 h-12">
+        <Button onClick={() => go("/addons")} className="w-full mt-6 rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 h-12">
           Continue to Add-ons →
         </Button>
       </div>
     </section>
+    </>
   );
 }
