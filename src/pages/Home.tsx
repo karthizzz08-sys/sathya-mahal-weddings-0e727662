@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, Wind, UtensilsCrossed, Car, Users, Star } from "lucide-react";
+import { Sparkles, Star } from "lucide-react";
 import hero from "@/assets/hero-hall.jpg";
-import decor from "@/assets/decor-1.jpg";
+import featureHall from "@/assets/feature-hall.jpg";
+import featureParking from "@/assets/feature-parking.jpg";
+import featureAc from "@/assets/feature-ac.jpg";
+import featureDining from "@/assets/feature-dining.jpg";
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
+
+const showcase = [
+  { title: "Prestigious Grand Hall", image: featureHall },
+  { title: "Large Parking Facilities", image: featureParking },
+  { title: "Fully Air Conditioned", image: featureAc },
+  { title: "Spacious Dining Hall", image: featureDining },
+];
 
 const plans = [
   { name: "Full Day", time: "4 PM – Next Day 2 PM", price: "₹55,000+" },
