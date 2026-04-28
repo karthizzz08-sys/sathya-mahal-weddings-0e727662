@@ -56,6 +56,21 @@ export default function Summary() {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.text("Booking Summary", 50, y);
+
+    // Pending status badge (top-right)
+    const badgeW = 90;
+    const badgeH = 24;
+    const badgeX = pageW - 50 - badgeW;
+    const badgeY = y - 18;
+    doc.setFillColor(255, 243, 205);
+    doc.setDrawColor(245, 158, 11);
+    doc.setLineWidth(0.8);
+    doc.roundedRect(badgeX, badgeY, badgeW, badgeH, 12, 12, "FD");
+    doc.setTextColor(146, 64, 14);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.text("STATUS: PENDING", badgeX + badgeW / 2, badgeY + 16, { align: "center" });
+
     y += 10;
     doc.setDrawColor(212, 175, 55);
     doc.setLineWidth(1.5);
@@ -149,7 +164,18 @@ export default function Summary() {
 
       <div className="max-w-3xl mx-auto space-y-6">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card rounded-3xl p-8">
-          <div className="grid sm:grid-cols-2 gap-4 pb-6 border-b border-border/50">
+          <div className="flex items-center justify-between pb-6 border-b border-border/50">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">Booking Status</p>
+              <p className="font-serif text-2xl mt-1">Awaiting Payment & Confirmation</p>
+            </div>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-amber-800 border border-amber-300 text-xs font-semibold uppercase tracking-widest">
+              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              Pending
+            </span>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4 py-6 border-b border-border/50">
             <div><p className="text-xs uppercase tracking-widest text-muted-foreground">Name</p><p className="font-serif text-xl">{state.customerName || "—"}</p></div>
             <div><p className="text-xs uppercase tracking-widest text-muted-foreground">Phone</p><p className="font-serif text-xl">{state.phone || "—"}</p></div>
             <div><p className="text-xs uppercase tracking-widest text-muted-foreground">Function</p><p className="font-serif text-xl capitalize">{state.functionType || "—"}</p></div>
