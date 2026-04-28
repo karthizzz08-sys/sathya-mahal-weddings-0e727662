@@ -84,13 +84,13 @@ export default function Plans() {
       </div>
 
       {/* Additional Charges */}
-      <div className="mt-24 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-xs uppercase tracking-[0.4em] text-accent mb-3">Transparent Pricing</p>
-          <h2 className="font-serif text-4xl md:text-5xl mb-3">Additional Charges</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">Tap to include any extras in your booking summary. Billed on actual usage.</p>
+      <div className="mt-16 md:mt-24 max-w-6xl mx-auto">
+        <div className="text-center mb-8 md:mb-12 px-2">
+          <p className="text-[11px] md:text-xs uppercase tracking-[0.35em] md:tracking-[0.4em] text-accent mb-3">Transparent Pricing</p>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl mb-3 leading-tight">Additional Charges</h2>
+          <p className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto">Tap to include any extras in your booking summary. Billed on actual usage.</p>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {extras.map((e, i) => {
             const selected = isExtraSelected(e.id);
             return (
@@ -105,22 +105,22 @@ export default function Plans() {
                 whileHover={{ y: -6 }}
                 whileTap={{ scale: 0.97 }}
                 aria-pressed={selected}
-                className={`relative text-left bg-card/80 backdrop-blur rounded-2xl p-6 text-center shadow-soft hover:shadow-gold transition-all border ${
+                className={`relative bg-card/80 backdrop-blur rounded-2xl p-5 md:p-6 text-center shadow-soft hover:shadow-gold transition-all border min-h-[180px] md:min-h-[200px] flex flex-col items-center justify-center ${
                   selected ? "border-accent ring-2 ring-accent/60 bg-accent/5" : "border-primary/15"
                 }`}
               >
-                <div className={`absolute top-3 right-3 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+                <div className={`absolute top-3 right-3 w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all ${
                   selected ? "bg-accent border-accent" : "border-muted-foreground/30 bg-background"
                 }`}>
-                  {selected && <Check className="h-3.5 w-3.5 text-accent-foreground" strokeWidth={3} />}
+                  {selected && <Check className="h-4 w-4 text-accent-foreground" strokeWidth={3} />}
                 </div>
-                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-gold flex items-center justify-center shadow-gold">
-                  <e.icon className="h-6 w-6 text-primary-foreground" />
+                <div className="w-14 h-14 md:w-16 md:h-16 mb-3 md:mb-4 rounded-2xl bg-gradient-gold flex items-center justify-center shadow-gold">
+                  <e.icon className="h-6 w-6 md:h-7 md:w-7 text-primary-foreground" />
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">{e.label}</p>
+                <p className="text-sm md:text-[15px] text-muted-foreground mb-1.5 leading-snug">{e.label}</p>
                 <p className="font-serif text-2xl md:text-3xl gold-text leading-none">{e.display}</p>
                 <p className="text-xs text-muted-foreground mt-1">{e.unit}</p>
-                <p className={`text-[10px] uppercase tracking-widest mt-3 font-semibold ${selected ? "text-accent" : "text-muted-foreground/60"}`}>
+                <p className={`text-[10px] md:text-[11px] uppercase tracking-widest mt-3 font-semibold ${selected ? "text-accent" : "text-muted-foreground/60"}`}>
                   {selected ? "Included ✓" : "Tap to add"}
                 </p>
               </motion.button>
