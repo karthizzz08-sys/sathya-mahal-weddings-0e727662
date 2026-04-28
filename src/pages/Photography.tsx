@@ -277,30 +277,28 @@ export default function Photography() {
                 </div>
 
                 {/* Features */}
-                <ul className="space-y-2.5 mb-6 flex-1">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={mode + t.id}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="space-y-2.5"
-                    >
-                      {pkg.features.map((f, idx) => {
-                        const FIcon = f.icon;
-                        return (
-                          <li key={idx} className="flex items-start gap-2.5 text-[13px] md:text-sm leading-snug">
-                            <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                              <FIcon className="h-3.5 w-3.5 text-primary" />
-                            </span>
-                            <span className="text-foreground/85">{f.text}</span>
-                          </li>
-                        );
-                      })}
-                    </motion.div>
-                  </AnimatePresence>
-                </ul>
+                <AnimatePresence mode="wait">
+                  <motion.ul
+                    key={mode + t.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="space-y-2.5 mb-6 flex-1"
+                  >
+                    {pkg.features.map((f, idx) => {
+                      const FIcon = f.icon;
+                      return (
+                        <li key={idx} className="flex items-start gap-2.5 text-[13px] md:text-sm leading-snug">
+                          <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                            <FIcon className="h-3.5 w-3.5 text-primary" />
+                          </span>
+                          <span className="text-foreground/85">{f.text}</span>
+                        </li>
+                      );
+                    })}
+                  </motion.ul>
+                </AnimatePresence>
 
                 <Button
                   onClick={() => select(t)}
