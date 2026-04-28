@@ -36,7 +36,7 @@ export default function Plans() {
     <>
     <PageLoader show={loading} label="Loading Photography…" />
     <section className="container py-16 md:py-24">
-      <SectionTitle eyebrow="Step 2" title="Hall Plans" subtitle="Select the timing that suits your celebration. Common: EB ₹30/unit, Gas ₹220/kg." />
+      <SectionTitle eyebrow="Step 2" title="Hall Plans" subtitle="Choose the perfect package for your celebration." />
       <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {plans.map((p, i) => {
           const selected = state.plan?.id === p.id;
