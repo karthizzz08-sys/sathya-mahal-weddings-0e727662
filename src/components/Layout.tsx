@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Menu, X } from "lucide-react";
 import { useState } from "react";
+import logo from "@/assets/logooo.jpeg";
 
 const links = [
   { to: "/", label: "Home" },
@@ -22,10 +23,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-cream">
       <header className="sticky top-0 z-40 glass-card border-b-0">
-        <div className="container flex items-center justify-between h-20">
-          <Link to="/" className="flex flex-col leading-none">
-            <span className="font-serif text-3xl font-semibold gold-text">Sathya Mahal</span>
-            <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Marriage Hall</span>
+        <div className="container flex items-center justify-between h-24">
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="Sathya Mahal Logo" className="h-20 w-20 object-contain" />
           </Link>
           <nav className="hidden lg:flex items-center gap-1">
             {links.map(l => (

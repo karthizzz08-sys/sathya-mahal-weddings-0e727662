@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
 import { CreditCard, Download } from "lucide-react";
@@ -9,9 +7,10 @@ import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
+import logo from "@/assets/logooo.jpeg";
 
 export default function Summary() {
-  const { state, set, total } = useBooking();
+  const { state, total } = useBooking();
   const { loading, go } = useTransitionNav(700);
 
   const proceed = () => {
@@ -29,8 +28,6 @@ export default function Summary() {
   if (state.catering.meal) lines.push({ label: "Catering", value: `${state.catering.meal.name} × ${state.catering.guests} = ₹${(state.catering.meal.price * state.catering.guests).toLocaleString()}` });
   if (state.addons.length) lines.push({ label: "Add-ons", value: state.addons.map(a => `${a.name} (₹${a.price.toLocaleString()})`).join(", ") });
   if (state.extras.length) lines.push({ label: "Extras", value: state.extras.map(a => `${a.name}`).join(", ") });
-  if (state.ebUnits) lines.push({ label: "EB Units", value: `${state.ebUnits} × ₹30 = ₹${(state.ebUnits * 30).toLocaleString()}` });
-  if (state.gasKg) lines.push({ label: "Gas", value: `${state.gasKg}kg × ₹220 = ₹${(state.gasKg * 220).toLocaleString()}` });
 
   const downloadPdf = () => {
     if (!total) {
@@ -161,6 +158,17 @@ export default function Summary() {
     <>
     <PageLoader show={loading} label="Opening payment…" />
     <section className="container py-16 md:py-24">
+      {/* LOGO SECTION */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col items-center gap-3 mb-12"
+      >
+        <img src={logo} alt="Sathya Mahal Logo" className="h-20 w-20 object-contain" />
+        <p className="text-muted-foreground italic">Sathya Mahal</p>
+      </motion.div>
+
       <SectionTitle eyebrow="Final Step" title="Booking Summary" subtitle="Review your selections and confirm via WhatsApp." />
 
       <div className="max-w-3xl mx-auto space-y-6">
@@ -192,17 +200,27 @@ export default function Summary() {
             )) : <p className="text-center text-muted-foreground italic">No selections yet. Please pick a plan and services.</p>}
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 pt-4">
-            <div>
-              <Label>EB Units Used</Label>
-              <Input type="number" min={0} value={state.ebUnits} onChange={e => set("ebUnits", Math.max(0, parseInt(e.target.value) || 0))} className="mt-2 h-12" />
-            </div>
-            <div>
-              <Label>Gas (kg)</Label>
-              <Input type="number" min={0} value={state.gasKg} onChange={e => set("gasKg", Math.max(0, parseInt(e.target.value) || 0))} className="mt-2 h-12" />
-            </div>
-          </div>
+
         </motion.div>
+
+        {state.addons.length > 0 && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card rounded-3xl p-8">
+            <h3 className="font-serif text-2xl mb-6">Selected Add-Ons</h3>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {state.addons.map((addon) => (
+                <div key={addon.id} className="flex items-start gap-4 pb-4 border-b border-border/30 last:border-0">
+                  <div className="w-20 h-20 bg-gradient-gold rounded-lg flex items-center justify-center text-primary-foreground text-sm font-semibold flex-shrink-0 text-center px-2">
+                    {addon.name.split(" ")[0]}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-serif text-lg">{addon.name}</p>
+                    <p className="text-primary font-semibold mt-2">₹{addon.price.toLocaleString()}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

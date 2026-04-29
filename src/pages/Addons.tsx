@@ -5,19 +5,25 @@ import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
 
 const groups = [
-  { title: "🍫 Basic", items: [
-    { id: "chocolate-plate", name: "Chocolate Plate", price: 150 },
-    { id: "vetrilai", name: "Vetrilai Paakku Plate", price: 100 },
+  { title: "� Welcome Setup", items: [
+    { id: "welcome-girls", name: "Welcome Girls", price: 2000, description: "Elegant welcome by girls" },
+    { id: "welcome-drinks", name: "Welcome Drinks (Coffee/Tea/Juice)", price: 4000, description: "Beverages for 100+ guests" },
+    { id: "welcome-crackers", name: "Welcome Crackers", price: 1500, description: "Celebratory fireworks" },
   ]},
-  { title: "🎉 Welcome Setup", items: [
-    { id: "welcome-girls", name: "Welcome Girls", price: 2000 },
-    { id: "welcome-drinks", name: "Welcome Drinks", price: 4000 },
-    { id: "welcome-crackers", name: "Welcome Crackers", price: 1500 },
+  { title: "🍽 Plates & Entry", items: [
+    { id: "valai-maram", name: "Valai Maram", price: 2000, description: "Traditional banana arch" },
+    { id: "santhanam-paneer", name: "Santhanam, Kumkumam & Paneer", price: 150, description: "Traditional welcome items" },
+    { id: "gem-plate", name: "Gem Plate", price: 100, description: "Decorative gem plate" },
+    { id: "vetilai-paakku", name: "Vetilai Paakku Plate", price: 100, description: "Betel leaf plate" },
+    { id: "flower-pot", name: "Flower Pot (Welcome Table)", price: 500, description: "Decorative flower arrangement" },
   ]},
-  { title: "🍽 Plates & Rituals", items: [
-    { id: "valai-maram", name: "Valai Maram", price: 2000 },
-    { id: "santhanam", name: "Santhanam & Kumkumam", price: 150 },
-    { id: "gem-plate", name: "Gem Plate", price: 100 },
+  { title: "✨ Decoration & Efforts", items: [
+    { id: "outer-lighting", name: "Outer Lighting", price: 10000, description: "LED & ambient lighting setup" },
+    { id: "dj-dance", name: "DJ & Dance", price: 35000, description: "Professional DJ with sound system" },
+    { id: "chariot-entry", name: "Chariot Entry", price: 35000, description: "Grand chariot for bride/groom" },
+    { id: "pyro-blast", name: "Pyro Blast", price: 1500, description: "Controlled pyrotechnics" },
+    { id: "bubble-effect", name: "Bubble Effect", price: 1500, description: "Bubble machine effects" },
+    { id: "ice-smoke", name: "Ice Smoke Entry", price: 5000, description: "Dry ice smoke effects" },
   ]},
 ];
 
@@ -52,8 +58,11 @@ export default function Addons() {
                     }`}
                   >
                     <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-serif text-lg">{it.name}</h4>
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${on ? "bg-gradient-gold border-transparent" : "border-primary/40"}`}>
+                      <div className="flex-1">
+                        <h4 className="font-serif text-lg">{it.name}</h4>
+                        {it.description && <p className="text-xs text-muted-foreground mt-1">{it.description}</p>}
+                      </div>
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ml-2 ${on ? "bg-gradient-gold border-transparent" : "border-primary/40"}`}>
                         {on && <span className="text-primary-foreground text-xs">✓</span>}
                       </div>
                     </div>

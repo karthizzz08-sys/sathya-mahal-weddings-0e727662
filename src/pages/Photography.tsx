@@ -31,6 +31,8 @@ interface PhotographyPackage {
   badge?: string;
   featured?: boolean;
   savingsLabel?: string;
+  description: string;
+  deliverables: string;
   features: string[];
   highlights: Array<{
     icon: React.ReactNode;
@@ -47,10 +49,14 @@ const packages: PhotographyPackage[] = [
     singlePrice: 12000,
     doublePrice: 15000,
     savingsLabel: "Save 25%",
+    description: "Perfect for intimate celebrations and pre-event moments",
+    deliverables: "Photos & Digital Album",
     features: [
       "Traditional photography (8K resolution)",
       "Fully digital photos delivered in pendrive",
       "1 Budget album (12x36)",
+      "300+ edited photos",
+      "Quick turnaround - 7 days",
     ],
     highlights: [
       { icon: <Camera className="h-5 w-5" />, label: "Traditional" },
@@ -66,12 +72,16 @@ const packages: PhotographyPackage[] = [
     singlePrice: 25000,
     doublePrice: 40000,
     savingsLabel: "Save 38%",
+    description: "Ideal for complete wedding coverage with video",
+    deliverables: "Photos, Video & Premium Album",
     features: [
       "Traditional photo (1)",
       "Traditional video (1)",
       "Full length HD video output + photos in pendrive",
       "Premium Canva album (1)",
       "1 Photo frame (12x18)",
+      "500+ edited photos",
+      "Wedding day highlights reel",
     ],
     highlights: [
       { icon: <Camera className="h-5 w-5" />, label: "Photo + Video" },
@@ -88,16 +98,20 @@ const packages: PhotographyPackage[] = [
     doublePrice: 65000,
     badge: "Best Value",
     savingsLabel: "Save 30%",
+    description: "Premium photography with multiple professionals and drone",
+    deliverables: "Photos, 4K Video, Drone Shots & Album",
     features: [
       "Traditional photographer (1)",
       "Traditional videographer (1)",
       "Candid photographer (1)",
       "Drone + LED TV (2 Nos)",
       "Full length 4K video + photos",
-      "Pendrive",
+      "Pendrive + backup storage",
       "Premium Canva album",
       "2 Photo frames (12x18)",
       "1 Couple pics gift",
+      "800+ edited photos",
+      "Cinematic highlights (3-5 min)",
     ],
     highlights: [
       { icon: <Plane className="h-5 w-5" />, label: "Drone" },
@@ -114,6 +128,8 @@ const packages: PhotographyPackage[] = [
     doublePrice: 90000,
     featured: true,
     savingsLabel: "Save 29%",
+    description: "Ultimate luxury package with cinematic production and AI enhancement",
+    deliverables: "Complete Coverage, 4K Video, AI Editing & Everything",
     features: [
       "Traditional photographer (1)",
       "Traditional videographer (1)",
@@ -122,12 +138,15 @@ const packages: PhotographyPackage[] = [
       "Drone + LED TV (2 Nos)",
       "Pre / Post wedding shoot",
       "Full length 4K video + photos",
-      "Pendrive",
+      "Pendrive + backup storage",
       "Premium Canva album",
       "Cinematic E-invite video",
       "Cinematic (AI + After Effects) teaser cut",
       "Cinematic one song edit",
       "2 Photo frames (12x18)",
+      "1200+ edited photos",
+      "Unlimited revisions",
+      "Same-day highlights video",
     ],
     highlights: [
       { icon: <Plane className="h-5 w-5" />, label: "Cinematic" },
@@ -248,12 +267,12 @@ export default function Photography() {
           </div>
         </motion.div>
 
-        {/* Photography Cards Grid */}
+        {/* Photography Cards Grid - New Design */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12"
+          className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12"
         >
           {packages.map((pkg, idx) => {
             const price = eventType === "single" ? pkg.singlePrice : pkg.doublePrice;
@@ -264,93 +283,99 @@ export default function Photography() {
                 key={pkg.id}
                 variants={cardVariants}
                 whileHover={{ y: -8 }}
-                className={`relative group`}
+                className={`group`}
               >
                 <div
-                  className={`glass-card rounded-3xl p-6 md:p-8 h-full transition-all relative overflow-hidden ${
+                  className={`relative overflow-hidden rounded-3xl transition-all h-full ${
                     pkg.featured
-                      ? "ring-2 ring-primary shadow-gold md:col-span-1 lg:scale-105"
-                      : "hover:shadow-gold"
-                  } ${isSelected ? "ring-2 ring-accent" : ""}`}
+                      ? "ring-3 ring-primary shadow-lg md:col-span-2"
+                      : "bg-card/60 backdrop-blur"
+                  } ${isSelected ? "ring-3 ring-accent shadow-gold" : ""}`}
+                  style={{
+                    background: pkg.featured 
+                      ? "linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 100%)"
+                      : undefined
+                  }}
                 >
-                  {/* Background Glow */}
-                  <div
-                    className={`absolute inset-0 opacity-5 blur-3xl bg-gradient-to-br ${getTierColor(
-                      pkg.tier
-                    )}`}
-                  ></div>
-
-                  {/* Featured Badge */}
-                  {pkg.featured && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-gold text-primary-foreground text-[11px] px-4 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-1.5 shadow-gold">
-                      <Crown className="h-3.5 w-3.5" /> Most Popular
+                  {/* Top Banner with Gradient */}
+                  <div className={`h-20 bg-gradient-to-r ${getTierColor(pkg.tier)} relative overflow-hidden`}>
+                    <div className="absolute inset-0 opacity-10">
+                      <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl transform translate-x-20 -translate-y-20"></div>
                     </div>
-                  )}
-
-                  {/* Badge */}
-                  {pkg.badge && (
-                    <div className="absolute top-6 right-6 bg-accent/20 text-accent text-[11px] px-3 py-1 rounded-full font-semibold uppercase tracking-wider">
-                      {pkg.badge}
-                    </div>
-                  )}
-
-                  <div className="relative z-10">
-                    {/* Tier Icon and Name */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getTierColor(
-                          pkg.tier
-                        )} text-white flex items-center justify-center shadow-lg`}
-                      >
-                        {pkg.icon}
+                    <div className="relative h-full flex items-center justify-between px-8">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center text-white">
+                          {pkg.icon}
+                        </div>
+                        <h3 className="font-serif text-2xl text-white font-bold">{pkg.name}</h3>
                       </div>
-                      <h3 className={`font-serif text-2xl md:text-3xl font-bold ${getTierTextColor(pkg.tier)}`}>
-                        {pkg.name}
-                      </h3>
+                      {pkg.featured && (
+                        <span className="bg-white/20 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-semibold">
+                          ★ Most Popular
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="p-8">
+                    {/* Description */}
+                    <p className="text-sm text-muted-foreground italic mb-4">{pkg.description}</p>
+
+                    {/* Deliverables Badge */}
+                    <div className="bg-primary/10 border border-primary/20 rounded-lg px-4 py-2 mb-6">
+                      <p className="text-xs uppercase tracking-widest font-semibold text-primary mb-1">What You Get</p>
+                      <p className="text-sm font-semibold text-foreground">{pkg.deliverables}</p>
                     </div>
 
-                    {/* Price */}
-                    <div className="mb-6">
-                      <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1">
+                    {/* Price Section */}
+                    <div className="mb-8 pb-8 border-b border-border/30">
+                      <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
                         {eventType === "single" ? "Single Event" : "Two Events"}
                       </p>
-                      <div className="flex items-baseline gap-2">
-                        <p className="font-serif text-4xl md:text-5xl gold-text font-bold">
+                      <div className="flex items-baseline gap-2 mb-4">
+                        <span className="font-serif text-5xl font-bold gold-text">
                           ₹{price.toLocaleString()}
-                        </p>
+                        </span>
                         {pkg.savingsLabel && eventType === "double" && (
                           <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">
                             {pkg.savingsLabel}
                           </span>
                         )}
                       </div>
+                      {pkg.badge && (
+                        <div className="text-xs font-semibold text-accent uppercase tracking-widest">
+                          ⭐ {pkg.badge}
+                        </div>
+                      )}
                     </div>
 
-                    {/* Highlights */}
-                    <div className="flex gap-2 mb-6">
+                    {/* Key Highlights */}
+                    <div className="grid grid-cols-3 gap-3 mb-8">
                       {pkg.highlights.map((h, i) => (
-                        <div
-                          key={i}
-                          className="flex-1 bg-background/80 rounded-lg p-2 text-center text-xs"
-                        >
-                          <div className="text-amber-600 flex justify-center mb-1">{h.icon}</div>
-                          <p className="text-[10px] text-muted-foreground">{h.label}</p>
+                        <div key={i} className="text-center">
+                          <div className="text-primary flex justify-center mb-2 text-2xl">{h.icon}</div>
+                          <p className="text-xs font-semibold text-muted-foreground">{h.label}</p>
                         </div>
                       ))}
                     </div>
 
-                    {/* Features */}
-                    <ul className="space-y-2.5 mb-8">
-                      {pkg.features.map((f, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2.5 text-sm leading-snug"
-                        >
-                          <Check className="h-4 w-4 text-primary mt-0.5 shrink-0 flex-shrink-0" />
-                          <span className="text-muted-foreground">{f}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Features List */}
+                    <div className="mb-8">
+                      <h4 className="text-sm font-semibold text-foreground mb-3">Included Features:</h4>
+                      <ul className="space-y-2">
+                        {pkg.features.slice(0, 6).map((f, i) => (
+                          <li key={i} className="flex items-start gap-3 text-sm">
+                            <Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                            <span className="text-muted-foreground">{f}</span>
+                          </li>
+                        ))}
+                        {pkg.features.length > 6 && (
+                          <li className="text-sm text-primary font-semibold pt-2">
+                            + {pkg.features.length - 6} more premium features
+                          </li>
+                        )}
+                      </ul>
+                    </div>
 
                     {/* CTA Button */}
                     <Button
@@ -361,7 +386,7 @@ export default function Photography() {
                           : `bg-gradient-to-r ${getTierColor(pkg.tier)} text-white hover:opacity-90`
                       }`}
                     >
-                      {isSelected ? "Selected ✓" : "Select Package"}
+                      {isSelected ? "✓ Selected" : "Select Package"}
                     </Button>
                   </div>
                 </div>
@@ -371,85 +396,14 @@ export default function Photography() {
         </motion.div>
 
         {/* Comparison Table - Optional Enhancement */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-7xl mx-auto mt-16 md:mt-24"
-        >
-          <div className="text-center mb-8 md:mb-12">
-            <p className="text-[11px] uppercase tracking-[0.35em] text-accent mb-3">Package Comparison</p>
-            <h2 className="font-serif text-3xl md:text-4xl mb-3 leading-tight">
-              Choose Your Perfect Package
-            </h2>
-            <p className="text-sm text-muted-foreground max-w-xl mx-auto">
-              Compare all features and select the package that best suits your needs
-            </p>
-          </div>
-
-          {/* Quick Feature Comparison */}
-          <div className="glass-card rounded-3xl p-6 md:p-8 overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-4 px-4 font-serif text-base md:text-lg">Feature</th>
-                  {packages.map((pkg) => (
-                    <th
-                      key={pkg.id}
-                      className={`text-center py-4 px-4 font-serif font-bold ${getTierTextColor(pkg.tier)}`}
-                    >
-                      {pkg.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-border/50">
-                  <td className="py-4 px-4 font-semibold text-foreground">Photographers</td>
-                  <td className="text-center py-4 px-4">1</td>
-                  <td className="text-center py-4 px-4">1</td>
-                  <td className="text-center py-4 px-4">2</td>
-                  <td className="text-center py-4 px-4">3</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-4 px-4 font-semibold text-foreground">Videographers</td>
-                  <td className="text-center py-4 px-4">-</td>
-                  <td className="text-center py-4 px-4">1</td>
-                  <td className="text-center py-4 px-4">1</td>
-                  <td className="text-center py-4 px-4">2</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-4 px-4 font-semibold text-foreground">Video Quality</td>
-                  <td className="text-center py-4 px-4">-</td>
-                  <td className="text-center py-4 px-4">HD</td>
-                  <td className="text-center py-4 px-4">4K</td>
-                  <td className="text-center py-4 px-4">4K + Cinematic</td>
-                </tr>
-                <tr className="border-b border-border/50">
-                  <td className="py-4 px-4 font-semibold text-foreground">Drone Coverage</td>
-                  <td className="text-center py-4 px-4">-</td>
-                  <td className="text-center py-4 px-4">-</td>
-                  <td className="text-center py-4 px-4">✓</td>
-                  <td className="text-center py-4 px-4">✓</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-4 font-semibold text-foreground">Cinematic Edits</td>
-                  <td className="text-center py-4 px-4">-</td>
-                  <td className="text-center py-4 px-4">-</td>
-                  <td className="text-center py-4 px-4">-</td>
-                  <td className="text-center py-4 px-4">✓</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </motion.div>
-
-        {/* Continue Button */}
         <div className="text-center mt-12 md:mt-16">
+          <p className="text-sm text-muted-foreground mb-6">
+            {state.photography ? "Ready to move forward?" : "Select a photography package to continue"}
+          </p>
           <Button
-            onClick={() => navigate("/decoration")}
-            variant="outline"
-            className="rounded-full border-primary/40 hover:bg-primary hover:text-primary-foreground"
+            onClick={() => state.photography && navigate("/decoration")}
+            disabled={!state.photography}
+            className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8"
           >
             Continue to Decoration →
           </Button>
