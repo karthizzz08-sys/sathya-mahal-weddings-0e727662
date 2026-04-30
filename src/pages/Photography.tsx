@@ -11,6 +11,7 @@ import {
   Crown,
   Check,
   Film,
+  MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
@@ -272,7 +273,7 @@ export default function Photography() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-12"
         >
           {packages.map((pkg, idx) => {
             const price = eventType === "single" ? pkg.singlePrice : pkg.doublePrice;
@@ -282,117 +283,110 @@ export default function Photography() {
               <motion.div
                 key={pkg.id}
                 variants={cardVariants}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -8, scale: 1.05 }}
                 className={`group`}
               >
                 <div
-                  className={`relative overflow-hidden rounded-3xl transition-all h-full ${
-                    pkg.featured
-                      ? "ring-3 ring-primary shadow-lg md:col-span-2"
-                      : "bg-card/60 backdrop-blur"
-                  } ${isSelected ? "ring-3 ring-accent shadow-gold" : ""}`}
-                  style={{
-                    background: pkg.featured 
-                      ? "linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 100%)"
-                      : undefined
-                  }}
+                  className={`relative overflow-hidden rounded-2xl h-full transition-all border-2 ${
+                    isSelected 
+                      ? "border-accent shadow-gold bg-gradient-to-br from-primary/5 to-transparent" 
+                      : "border-primary/20 hover:border-primary/40 bg-white/50 backdrop-blur"
+                  }`}
                 >
-                  {/* Top Banner with Gradient */}
-                  <div className={`h-20 bg-gradient-to-r ${getTierColor(pkg.tier)} relative overflow-hidden`}>
-                    <div className="absolute inset-0 opacity-10">
-                      <div className="absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl transform translate-x-20 -translate-y-20"></div>
+                  {/* Icon & Name Header */}
+                  <div className="p-6 pb-4">
+                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 ${
+                      `bg-gradient-to-r ${getTierColor(pkg.tier)} text-white`
+                    }`}>
+                      {pkg.icon}
                     </div>
-                    <div className="relative h-full flex items-center justify-between px-8">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center text-white">
-                          {pkg.icon}
-                        </div>
-                        <h3 className="font-serif text-2xl text-white font-bold">{pkg.name}</h3>
-                      </div>
-                      {pkg.featured && (
-                        <span className="bg-white/20 backdrop-blur text-white text-xs px-3 py-1 rounded-full font-semibold">
-                          ★ Most Popular
-                        </span>
+                    <h3 className="font-serif text-2xl font-bold text-foreground mb-1">{pkg.name}</h3>
+                    {pkg.featured && (
+                      <span className="text-xs font-semibold text-accent">★ Most Popular</span>
+                    )}
+                  </div>
+
+                  {/* Description */}
+                  <div className="px-6 pb-4">
+                    <p className="text-xs text-muted-foreground leading-relaxed">{pkg.description}</p>
+                  </div>
+
+                  {/* Price Card */}
+                  <div className={`mx-6 mb-4 p-4 rounded-xl bg-gradient-to-r ${getTierColor(pkg.tier)} text-white`}>
+                    <p className="text-xs uppercase tracking-wider opacity-80 mb-1">
+                      {eventType === "single" ? "Single Event" : "Two Events"}
+                    </p>
+                    <div className="flex items-baseline justify-between">
+                      <span className="font-serif text-3xl font-bold">₹{price.toLocaleString()}</span>
+                      {pkg.savingsLabel && eventType === "double" && (
+                        <span className="text-xs font-semibold opacity-90">{pkg.savingsLabel}</span>
                       )}
                     </div>
                   </div>
 
-                  <div className="p-8">
-                    {/* Description */}
-                    <p className="text-sm text-muted-foreground italic mb-4">{pkg.description}</p>
+                  {/* Deliverables */}
+                  <div className="px-6 pb-4">
+                    <p className="text-xs uppercase tracking-widest font-semibold text-primary mb-1">Includes</p>
+                    <p className="text-sm font-medium text-foreground">{pkg.deliverables}</p>
+                  </div>
 
-                    {/* Deliverables Badge */}
-                    <div className="bg-primary/10 border border-primary/20 rounded-lg px-4 py-2 mb-6">
-                      <p className="text-xs uppercase tracking-widest font-semibold text-primary mb-1">What You Get</p>
-                      <p className="text-sm font-semibold text-foreground">{pkg.deliverables}</p>
-                    </div>
-
-                    {/* Price Section */}
-                    <div className="mb-8 pb-8 border-b border-border/30">
-                      <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                        {eventType === "single" ? "Single Event" : "Two Events"}
-                      </p>
-                      <div className="flex items-baseline gap-2 mb-4">
-                        <span className="font-serif text-5xl font-bold gold-text">
-                          ₹{price.toLocaleString()}
-                        </span>
-                        {pkg.savingsLabel && eventType === "double" && (
-                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold">
-                            {pkg.savingsLabel}
-                          </span>
-                        )}
-                      </div>
-                      {pkg.badge && (
-                        <div className="text-xs font-semibold text-accent uppercase tracking-widest">
-                          ⭐ {pkg.badge}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Key Highlights */}
-                    <div className="grid grid-cols-3 gap-3 mb-8">
-                      {pkg.highlights.map((h, i) => (
-                        <div key={i} className="text-center">
-                          <div className="text-primary flex justify-center mb-2 text-2xl">{h.icon}</div>
-                          <p className="text-xs font-semibold text-muted-foreground">{h.label}</p>
+                  {/* Quick Features */}
+                  <div className="px-6 pb-4">
+                    <div className="space-y-2">
+                      {pkg.features.slice(0, 3).map((f, i) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                          <span className="text-xs text-muted-foreground leading-tight">{f}</span>
                         </div>
                       ))}
+                      {pkg.features.length > 3 && (
+                        <p className="text-xs text-primary font-semibold pt-1">
+                          + {pkg.features.length - 3} more features
+                        </p>
+                      )}
                     </div>
+                  </div>
 
-                    {/* Features List */}
-                    <div className="mb-8">
-                      <h4 className="text-sm font-semibold text-foreground mb-3">Included Features:</h4>
-                      <ul className="space-y-2">
-                        {pkg.features.slice(0, 6).map((f, i) => (
-                          <li key={i} className="flex items-start gap-3 text-sm">
-                            <Check className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <span className="text-muted-foreground">{f}</span>
-                          </li>
-                        ))}
-                        {pkg.features.length > 6 && (
-                          <li className="text-sm text-primary font-semibold pt-2">
-                            + {pkg.features.length - 6} more premium features
-                          </li>
-                        )}
-                      </ul>
-                    </div>
-
-                    {/* CTA Button */}
+                  {/* Button */}
+                  <div className="px-6 pb-6">
                     <Button
                       onClick={() => select(pkg)}
-                      className={`w-full rounded-full h-12 text-base font-semibold transition-all ${
+                      className={`w-full rounded-full h-10 text-sm font-semibold transition-all ${
                         isSelected
                           ? "bg-accent text-accent-foreground"
                           : `bg-gradient-to-r ${getTierColor(pkg.tier)} text-white hover:opacity-90`
                       }`}
                     >
-                      {isSelected ? "✓ Selected" : "Select Package"}
+                      {isSelected ? "✓ Selected" : "Select"}
                     </Button>
                   </div>
                 </div>
               </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* WhatsApp Contact Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto mb-12 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-8 text-center"
+        >
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <MessageCircle className="h-6 w-6 text-green-600" />
+            <h3 className="font-serif text-2xl font-bold text-foreground">Have Questions?</h3>
+          </div>
+          <p className="text-muted-foreground mb-6">Contact us on WhatsApp for package details and custom quotes</p>
+          <a
+            href="https://wa.me/917200101470"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-all shadow-lg"
+          >
+            <MessageCircle className="h-5 w-5" />
+            Chat on WhatsApp: +91 7200101470
+          </a>
         </motion.div>
 
         {/* Comparison Table - Optional Enhancement */}

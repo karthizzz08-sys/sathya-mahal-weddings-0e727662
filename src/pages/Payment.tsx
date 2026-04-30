@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import gpayQr from "@/assets/gpay-qr.jpg";
 
 const OWNER_UPI = "sathyamahal@okicici";
-const OWNER_WHATSAPP = "919999999999";
+const OWNER_WHATSAPP = "917200101470";
 
 export default function Payment() {
   const { state, total } = useBooking();
