@@ -25,6 +25,9 @@ export default function Summary() {
   if (state.plan) lines.push({ label: "Plan", value: `${state.plan.name} — ₹${state.plan.price.toLocaleString()}` });
   if (state.photography) lines.push({ label: "Photography", value: `${state.photography.name} — ₹${state.photography.price.toLocaleString()}` });
   if (state.decoration.length) lines.push({ label: "Decoration", value: state.decoration.map(d => `${d.name} (₹${d.price.toLocaleString()})`).join(", ") });
+  if (state.morningMenu) lines.push({ label: "Morning Menu", value: state.morningMenu });
+  if (state.lunchMenu) lines.push({ label: "Lunch Menu", value: state.lunchMenu });
+  if (state.eveningMenu) lines.push({ label: "Evening Menu", value: state.eveningMenu });
   if (state.catering.meal) lines.push({ label: "Catering", value: `${state.catering.meal.name} × ${state.catering.guests} = ₹${(state.catering.meal.price * state.catering.guests).toLocaleString()}` });
   if (state.addons.length) lines.push({ label: "Add-ons", value: state.addons.map(a => `${a.name} (₹${a.price.toLocaleString()})`).join(", ") });
   if (state.extras.length) lines.push({ label: "Extras", value: state.extras.map(a => `${a.name}`).join(", ") });

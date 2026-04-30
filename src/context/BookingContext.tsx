@@ -15,6 +15,9 @@ export interface BookingState {
   extras: SelectedItem[];
   ebUnits: number;
   gasKg: number;
+  morningMenu: string | null;
+  lunchMenu: string | null;
+  eveningMenu: string | null;
 }
 
 interface Ctx {
@@ -38,6 +41,9 @@ const initial: BookingState = {
   extras: [],
   ebUnits: 0,
   gasKg: 0,
+  morningMenu: null,
+  lunchMenu: null,
+  eveningMenu: null,
 };
 
 const BookingCtx = createContext<Ctx | null>(null);

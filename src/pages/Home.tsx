@@ -25,12 +25,12 @@ const gallery = [
 ];
 
 const djVideos = [
-  { title: "DJ & Dance Performance 1", videoId: "dQw4w9WgXcQ" },
-  { title: "DJ & Dance Performance 2", videoId: "dQw4w9WgXcQ" },
-  { title: "Live DJ Performance", videoId: "dQw4w9WgXcQ" },
-  { title: "Wedding DJ Mix", videoId: "dQw4w9WgXcQ" },
-  { title: "Dance Floor Energy", videoId: "dQw4w9WgXcQ" },
-  { title: "Professional DJ Setup", videoId: "dQw4w9WgXcQ" },
+  { title: "DJ & Dance Performance 1", videoSrc: "/videos/d1.mp4" },
+  { title: "DJ & Dance Performance 2", videoSrc: "/videos/d2.mp4" },
+  { title: "Live DJ Performance", videoSrc: "/videos/d3.mp4" },
+  { title: "Wedding DJ Mix", videoSrc: "/videos/d4.mp4" },
+  { title: "Dance Floor Energy", videoSrc: "/videos/v2.mp4" },
+  { title: "Professional DJ Setup", videoSrc: "/videos/v3.mp4" },
 ];
 
 export default function Home() {
@@ -112,16 +112,15 @@ export default function Home() {
                 className="group"
               >
                 <div className="relative overflow-hidden rounded-2xl shadow-soft hover:shadow-gold transition-all duration-300 aspect-video bg-black">
-                  <iframe
+                  <video
                     width="100%"
                     height="100%"
-                    src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
-                    title={video.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="rounded-2xl"
-                  />
+                    controls
+                    className="w-full h-full object-cover rounded-2xl"
+                  >
+                    <source src={video.videoSrc} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
                 <h3 className="font-serif text-lg mt-4 group-hover:text-primary transition-colors">{video.title}</h3>
               </motion.div>
