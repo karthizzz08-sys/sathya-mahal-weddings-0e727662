@@ -11,6 +11,10 @@ export interface BookingState {
   photography: SelectedItem | null;
   decoration: SelectedItem[];
   catering: { meal: SelectedItem | null; guests: number };
+  tiffen: SelectedItem | null;
+  lunch: SelectedItem | null;
+  evening: SelectedItem | null;
+  guests: number;
   addons: SelectedItem[];
   extras: SelectedItem[];
   ebUnits: number;
@@ -37,6 +41,10 @@ const initial: BookingState = {
   photography: null,
   decoration: [],
   catering: { meal: null, guests: 100 },
+  tiffen: null,
+  lunch: null,
+  evening: null,
+  guests: 250,
   addons: [],
   extras: [],
   ebUnits: 0,
@@ -63,6 +71,9 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     (state.plan?.price || 0) +
     (state.photography?.price || 0) +
     state.decoration.reduce((a, b) => a + b.price, 0) +
+    (state.tiffen ? state.tiffen.price * state.guests : 0) +
+    (state.lunch ? state.lunch.price * state.guests : 0) +
+    (state.evening ? state.evening.price * state.guests : 0) +
     (state.catering.meal ? state.catering.meal.price * state.catering.guests : 0) +
     state.addons.reduce((a, b) => a + b.price, 0) +
     state.extras.reduce((a, b) => a + b.price, 0) +

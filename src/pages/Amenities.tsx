@@ -141,6 +141,40 @@ export default function Amenities() {
         </section>
       ))}
 
+      {/* LOCATION MAP */}
+      <section className="py-24 bg-white">
+        <div className="container">
+          <SectionTitle
+            eyebrow="Find Us"
+            title="Our Location"
+            subtitle="Visit Sathya Mahal at our premium venue location."
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-12 overflow-hidden rounded-2xl shadow-gold aspect-video"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3887.0127!2d77.65!3d12.966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1234567890"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Sathya Mahal Location"
+            />
+          </motion.div>
+          <div className="mt-8 text-center">
+            <p className="text-lg text-muted-foreground">
+              📍 Sathya Mahal Marriage Hall - Your Premier Wedding Destination
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-gradient-luxe text-primary-foreground py-24">
         <div className="container text-center">

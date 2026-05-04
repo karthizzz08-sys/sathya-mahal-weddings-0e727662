@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
@@ -7,18 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
+import { useTransitionNav } from "@/hooks/useTransitionNav";
+import PageLoader from "@/components/PageLoader";
 import { toast } from "sonner";
-import { addDays } from "date-fns";
-
-// Mock booked dates
-const today = new Date();
-const bookedDates = [addDays(today, 3), addDays(today, 7), addDays(today, 12), addDays(today, 18), addDays(today, 25)];
-
 export default function Availability() {
   const { state, set } = useBooking();
-  const navigate = useNavigate();
+  const { loading, go } = useTransitionNav(700);
 
-  const isBooked = (d: Date) => bookedDates.some(b => b.toDateString() === d.toDateString());
+  const isBooked = (d: Date) => false; // No blocked dates
 
   const submit = () => {
     if (!state.customerName || !state.phone || !state.functionType || !state.date) {
@@ -30,11 +25,13 @@ export default function Availability() {
       return;
     }
     toast.success("Date available! Continue to plans.");
-    navigate("/plans");
+    go("/plans");
   };
 
   return (
-    <section className="container py-16 md:py-24">
+    <>
+      <PageLoader show={loading} label="Loading Plans…" />
+      <section className="container py-16 md:py-24">
       <SectionTitle eyebrow="Step 1" title="Check Availability" subtitle="Pick your auspicious date and share your details." />
       <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="glass-card rounded-3xl p-6 md:p-8">
@@ -43,8 +40,6 @@ export default function Availability() {
             selected={state.date ?? undefined}
             onSelect={(d) => d && set("date", d)}
             disabled={(d) => d < new Date(new Date().toDateString())}
-            modifiers={{ booked: bookedDates }}
-            modifiersClassNames={{ booked: "bg-booked/20 text-booked line-through" }}
             className="p-3 pointer-events-auto mx-auto"
             classNames={{
               day_selected: "bg-gradient-gold text-primary-foreground hover:opacity-90",
@@ -53,7 +48,6 @@ export default function Availability() {
           />
           <div className="mt-6 flex items-center justify-center gap-6 text-sm">
             <span className="flex items-center gap-2"><span className="h-3 w-3 rounded-full bg-success" />Available</span>
-            <span className="flex items-center gap-2"><span className="h-3 w-3 rounded-full bg-booked" />Booked</span>
             <span className="flex items-center gap-2"><span className="h-3 w-3 rounded-full bg-gradient-gold" />Selected</span>
           </div>
         </motion.div>
@@ -91,6 +85,7 @@ export default function Availability() {
           </Button>
         </motion.div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

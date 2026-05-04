@@ -2,16 +2,18 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
-import { CreditCard, Download } from "lucide-react";
+import { CreditCard, Download, CheckCircle2 } from "lucide-react";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import logo from "@/assets/logooo.jpeg";
+import { useState } from "react";
 
 export default function Summary() {
   const { state, total } = useBooking();
   const { loading, go } = useTransitionNav(700);
+  const [pdfDownloadTime, setPdfDownloadTime] = useState<string | null>(null);
 
   const proceed = () => {
     if (!total) {
@@ -154,6 +156,7 @@ export default function Summary() {
 
     const safeName = (state.customerName || "guest").replace(/[^a-z0-9]/gi, "_");
     doc.save(`SathyaMahal_Booking_${safeName}.pdf`);
+    setPdfDownloadTime(new Date().toLocaleString());
     toast.success("Booking summary downloaded ✓");
   };
 
@@ -179,12 +182,14 @@ export default function Summary() {
           <div className="flex items-center justify-between pb-6 border-b border-border/50">
             <div>
               <p className="text-xs uppercase tracking-widest text-muted-foreground">Booking Status</p>
-              <p className="font-serif text-2xl mt-1">Awaiting Payment & Confirmation</p>
+              <p className="font-serif text-2xl mt-1">Ready for Payment & Confirmation</p>
             </div>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-amber-800 border border-amber-300 text-xs font-semibold uppercase tracking-widest">
-              <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-              Pending
-            </span>
+            {pdfDownloadTime && (
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 text-green-800 border border-green-300 text-xs font-semibold uppercase tracking-widest">
+                <CheckCircle2 className="h-4 w-4" />
+                PDF Downloaded
+              </span>
+            )}
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4 py-6 border-b border-border/50">
@@ -192,6 +197,16 @@ export default function Summary() {
             <div><p className="text-xs uppercase tracking-widest text-muted-foreground">Phone</p><p className="font-serif text-xl">{state.phone || "—"}</p></div>
             <div><p className="text-xs uppercase tracking-widest text-muted-foreground">Function</p><p className="font-serif text-xl capitalize">{state.functionType || "—"}</p></div>
             <div><p className="text-xs uppercase tracking-widest text-muted-foreground">Date</p><p className="font-serif text-xl">{state.date ? state.date.toDateString() : "—"}</p></div>
+          </div>
+
+          {/* OVERALL TOTAL HIGHLIGHT */}
+          <div className="my-6 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl border-2 border-purple-200">
+            <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">Overall Total Amount</p>
+            <div className="flex items-baseline gap-2">
+              <span className="font-serif text-5xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">
+                ₹{total.toLocaleString()}
+              </span>
+            </div>
           </div>
 
           <div className="py-6 space-y-4">
@@ -203,27 +218,15 @@ export default function Summary() {
             )) : <p className="text-center text-muted-foreground italic">No selections yet. Please pick a plan and services.</p>}
           </div>
 
+          {pdfDownloadTime && (
+            <div className="mt-6 pt-6 border-t border-border/50">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">PDF Download Info</p>
+              <p className="text-sm text-foreground font-medium">✓ Summary downloaded on {pdfDownloadTime}</p>
+            </div>
+          )}
+
 
         </motion.div>
-
-        {state.addons.length > 0 && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card rounded-3xl p-8">
-            <h3 className="font-serif text-2xl mb-6">Selected Add-Ons</h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              {state.addons.map((addon) => (
-                <div key={addon.id} className="flex items-start gap-4 pb-4 border-b border-border/30 last:border-0">
-                  <div className="w-20 h-20 bg-gradient-gold rounded-lg flex items-center justify-center text-primary-foreground text-sm font-semibold flex-shrink-0 text-center px-2">
-                    {addon.name.split(" ")[0]}
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-serif text-lg">{addon.name}</p>
-                    <p className="text-primary font-semibold mt-2">₹{addon.price.toLocaleString()}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
 
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

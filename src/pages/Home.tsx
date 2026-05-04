@@ -146,6 +146,85 @@ export default function Home() {
           </Button>
         </motion.div>
       </section>
+
+      {/* LOCATION FOOTER SECTION WITH GOOGLE MAP */}
+      <section className="w-full bg-secondary/30 py-16">
+        <div className="container">
+          <SectionTitle eyebrow="Find Us" title="Our Location" subtitle="Visit Sathya Mahal for your special celebration" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-8 items-center"
+          >
+            {/* Map */}
+            <div className="rounded-2xl overflow-hidden shadow-lg h-96 md:h-full min-h-96">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.0!2d78.0!3d17.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8e0!3d0!8m2!3d17.360589!4d78.474434!5e0!3m2!1sen!2sin!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "400px" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-2xl"
+              />
+            </div>
+
+            {/* Location Info */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-serif text-2xl font-bold mb-2">Sathya Mahal Wedding Hall</h3>
+                <p className="text-muted-foreground mb-4">Conveniently located with easy access to highways and proximity to the city center.</p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="text-primary text-2xl">📍</div>
+                  <div>
+                    <p className="font-semibold text-foreground">Address</p>
+                    <p className="text-muted-foreground">Sathya Mahal, Wedding Hall, City Name</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="text-primary text-2xl">📞</div>
+                  <div>
+                    <p className="font-semibold text-foreground">Contact</p>
+                    <a href="tel:+917200101470" className="text-primary hover:underline font-semibold">
+                      +91 7200101470
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="text-primary text-2xl">💬</div>
+                  <div>
+                    <p className="font-semibold text-foreground">WhatsApp</p>
+                    <a href="https://wa.me/917200101470" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+                      Chat with us
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="text-primary text-2xl">🕐</div>
+                  <div>
+                    <p className="font-semibold text-foreground">Business Hours</p>
+                    <p className="text-muted-foreground">Monday - Sunday: 10:00 AM - 8:00 PM</p>
+                  </div>
+                </div>
+              </div>
+
+              <Button asChild className="bg-gradient-gold text-primary-foreground hover:opacity-90 rounded-full w-full h-12">
+                <a href="https://www.google.com/maps/search/Sathya+Mahal" target="_blank" rel="noopener noreferrer">
+                  View on Google Maps →
+                </a>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 }

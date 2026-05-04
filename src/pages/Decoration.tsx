@@ -1,44 +1,47 @@
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
+import { useTransitionNav } from "@/hooks/useTransitionNav";
+import PageLoader from "@/components/PageLoader";
 import featureHall from "@/assets/feature-hall.jpg";
 import featureDining from "@/assets/feature-dining.jpg";
 import featureAc from "@/assets/feature-ac.jpg";
 import featureParking from "@/assets/feature-parking.jpg";
 
 const decorationStyles = [
-  { id: "style-1", name: "Royal Golden Setup", image: featureHall, price: 15000 },
-  { id: "style-2", name: "Classic Floral Arch", image: featureDining, price: 12000 },
-  { id: "style-3", name: "Modern Minimalist", image: featureAc, price: 18000 },
-  { id: "style-4", name: "Traditional Mandap", image: featureParking, price: 20000 },
-  { id: "style-5", name: "Garden Theme", image: featureHall, price: 16000 },
-  { id: "style-6", name: "Crystal & Lights", image: featureDining, price: 22000 },
-  { id: "style-7", name: "Rose Petals Design", image: featureAc, price: 14000 },
-  { id: "style-8", name: "Grand Entrance", image: featureParking, price: 19000 },
-  { id: "style-9", name: "Marigold Elegance", image: featureHall, price: 13000 },
-  { id: "style-10", name: "Pearl & Diamond", image: featureDining, price: 25000 },
-  { id: "style-11", name: "Tropical Paradise", image: featureAc, price: 17000 },
-  { id: "style-12", name: "Gold & Maroon", image: featureParking, price: 18000 },
-  { id: "style-13", name: "Floral Cascade", image: featureHall, price: 15000 },
-  { id: "style-14", name: "Baroque Luxury", image: featureDining, price: 23000 },
-  { id: "style-15", name: "Nature Inspired", image: featureAc, price: 16000 },
-  { id: "style-16", name: "Silver Elegance", image: featureParking, price: 20000 },
+  { id: "style-1", name: "Royal Golden Setup", image: featureHall, price: 5000 },
+  { id: "style-2", name: "Classic Floral Arch", image: featureDining, price: 5000 },
+  { id: "style-3", name: "Modern Minimalist", image: featureAc, price: 5000 },
+  { id: "style-4", name: "Traditional Mandap", image: featureParking, price: 5000 },
+  { id: "style-5", name: "Garden Theme", image: featureHall, price: 5000 },
+  { id: "style-6", name: "Crystal & Lights", image: featureDining, price: 5000 },
+  { id: "style-7", name: "Rose Petals Design", image: featureAc, price: 5000 },
+  { id: "style-8", name: "Grand Entrance", image: featureParking, price: 5000 },
+  { id: "style-9", name: "Marigold Elegance", image: featureHall, price: 5000 },
+  { id: "style-10", name: "Pearl & Diamond", image: featureDining, price: 5000 },
+  { id: "style-11", name: "Tropical Paradise", image: featureAc, price: 5000 },
+  { id: "style-12", name: "Gold & Maroon", image: featureParking, price: 5000 },
+  { id: "style-13", name: "Floral Cascade", image: featureHall, price: 5000 },
+  { id: "style-14", name: "Baroque Luxury", image: featureDining, price: 5000 },
+  { id: "style-15", name: "Nature Inspired", image: featureAc, price: 5000 },
+  { id: "style-16", name: "Silver Elegance", image: featureParking, price: 5000 },
 ];
 
 export default function Decoration() {
   const { state, toggleItem } = useBooking();
-  const navigate = useNavigate();
+  const { loading, go } = useTransitionNav(700);
   const isOn = (id: string) => state.decoration.some(d => d.id === id);
 
   const selectStyle = (style: typeof decorationStyles[0]) => {
-    toggleItem("decoration", { id: style.id, name: style.name, price: style.price });
+    toggleItem("decoration", { id: style.id, name: style.name, price: 5000 });
   };
 
   return (
-    <section className="container py-16 md:py-24">
-      <SectionTitle eyebrow="Step 4" title="Decoration Styles" subtitle="Select your preferred decoration theme for the event." />
+    <>
+      <PageLoader show={loading} label="Loading Catering…" />
+      <section className="container py-16 md:py-24">
+        <SectionTitle eyebrow="Step 4" title="Decoration Styles" subtitle="Select your preferred decoration theme for the event." />
 
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -88,11 +91,12 @@ export default function Decoration() {
           <p className="text-sm text-muted-foreground mb-4">
             {state.decoration.length === 0 ? "Select one or more decoration styles" : `${state.decoration.length} style(s) selected`}
           </p>
-          <Button onClick={() => navigate("/catering")} className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8">
+          <Button onClick={() => go("/catering")} className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8">
             Continue to Catering →
           </Button>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }

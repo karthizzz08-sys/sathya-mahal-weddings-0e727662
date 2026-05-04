@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
+import { useTransitionNav } from "@/hooks/useTransitionNav";
+import PageLoader from "@/components/PageLoader";
 import b1 from "@/assets/b1.jpeg";
 import b2 from "@/assets/b2.jpeg";
 import b3 from "@/assets/b3.jpeg";
@@ -45,11 +46,13 @@ const groups = [
 
 export default function Addons() {
   const { state, toggleItem } = useBooking();
-  const navigate = useNavigate();
+  const { loading, go } = useTransitionNav(700);
   const isOn = (id: string) => state.addons.some(a => a.id === id);
 
   return (
-    <section className="container py-16 md:py-24">
+    <>
+      <PageLoader show={loading} label="Loading Summary…" />
+      <section className="container py-16 md:py-24">
       <SectionTitle eyebrow="Step 6" title="Add-Ons" subtitle="Sprinkle your celebration with delightful traditions." />
 
       <div className="max-w-5xl mx-auto space-y-12">
@@ -101,11 +104,12 @@ export default function Addons() {
           </div>
         ))}
         <div className="text-center">
-          <Button onClick={() => navigate("/summary")} className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8">
+          <Button onClick={() => go("/summary")} className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8">
             View Booking Summary →
           </Button>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
