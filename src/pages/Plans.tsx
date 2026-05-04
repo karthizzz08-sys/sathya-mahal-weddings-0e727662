@@ -15,11 +15,11 @@ const extras = [
 ];
 
 const plans = [
-  { id: "full", name: "Full Day Plan", time: "4 PM – Next Day 2 PM", price: 55000, breakdown: "₹55,000 + ₹7,000 + ₹12,000", featured: true,
+  { id: "full", name: "Full Day Plan", time: "4 PM – Next Day 2 PM", price: 55000, breakdown: " ₹7,000 + ₹12,000", featured: true,
     features: ["22 hours hall access", "Bridal & groom rooms", "Generator backup", "Full decor support"] },
-  { id: "evening", name: "Evening Plan", time: "4 PM – 10 PM", price: 30000, breakdown: "₹30,000 + ₹5,000 + ₹6,000",
+  { id: "evening", name: "Evening Plan", time: "4 PM – 10 PM", price: 30000, breakdown:"₹5,000 + ₹6,000",
     features: ["6 hours hall access", "Reception ready", "Bridal room", "Generator backup"] },
-  { id: "morning", name: "Morning Plan", time: "5 AM – 2 PM", price: 30000, breakdown: "₹30,000 + ₹5,000 + ₹8,000",
+  { id: "morning", name: "Morning Plan", time: "5 AM – 2 PM", price: 30000, breakdown: " ₹5,000 + ₹8,000",
     features: ["9 hours hall access", "Muhurtham ready", "Bridal room", "Generator backup"] },
 ];
 

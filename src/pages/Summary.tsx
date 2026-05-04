@@ -2,13 +2,15 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
-import { CreditCard, Download, CheckCircle2 } from "lucide-react";
+import { CreditCard, Download, CheckCircle2, Calendar, User, MessageCircle, Phone, MapPin } from "lucide-react";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import logo from "@/assets/logooo.jpeg";
 import { useState } from "react";
+
+const OWNER_WHATSAPP = "917200101470";
 
 export default function Summary() {
   const { state, total } = useBooking();
@@ -178,6 +180,70 @@ export default function Summary() {
       <SectionTitle eyebrow="Final Step" title="Booking Summary" subtitle="Review your selections and confirm via WhatsApp." />
 
       <div className="max-w-3xl mx-auto space-y-6">
+        {/* USER DETAILS CARD */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ delay: 0.1 }}
+          className="glass-card rounded-3xl p-8"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-3 rounded-full bg-gradient-gold/20">
+              <User className="h-6 w-6 gold-text" />
+            </div>
+            <h3 className="font-serif text-2xl">Your Details</h3>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">Full Name</p>
+              <p className="font-serif text-lg">{state.customerName || "—"}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">Phone Number</p>
+              <p className="font-serif text-lg">{state.phone || "—"}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">Event Type</p>
+              <p className="font-serif text-lg capitalize">{state.functionType || "—"}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">Guest Count</p>
+              <p className="font-serif text-lg">{state.guests} Guests</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* SELECTED DATE HIGHLIGHT */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ delay: 0.2 }}
+          className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-3xl p-8 border-2 border-blue-200 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 p-4 opacity-10">
+            <Calendar className="h-32 w-32" />
+          </div>
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-3 rounded-full bg-blue-100">
+                <Calendar className="h-6 w-6 text-blue-600" />
+              </div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">Your Selected Date</p>
+            </div>
+            <div className="space-y-2">
+              <p className="font-serif text-4xl text-blue-900">
+                {state.date ? state.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : "No Date Selected"}
+              </p>
+              {state.date && (
+                <p className="text-sm text-blue-700">
+                  {Math.ceil((state.date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} days from now
+                </p>
+              )}
+            </div>
+          </div>
+        </motion.div>
+
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card rounded-3xl p-8">
           <div className="flex items-center justify-between pb-6 border-b border-border/50">
             <div>
@@ -224,34 +290,81 @@ export default function Summary() {
               <p className="text-sm text-foreground font-medium">✓ Summary downloaded on {pdfDownloadTime}</p>
             </div>
           )}
-
-
         </motion.div>
 
+        {/* FINAL TOTAL WITH ACTION BUTTONS */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="bg-gradient-luxe text-primary-foreground rounded-3xl p-8 shadow-gold"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-            <div>
-              <p className="text-xs uppercase tracking-[0.4em] opacity-70 mb-2">Final Total</p>
-              <p className="font-serif text-5xl">₹{total.toLocaleString()}</p>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <p className="text-xs uppercase tracking-[0.4em] opacity-70 mb-2">Final Total</p>
+                <p className="font-serif text-5xl">₹{total.toLocaleString()}</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                <Button
+                  onClick={downloadPdf}
+                  variant="outline"
+                  className="bg-white/10 border-white/30 text-primary-foreground hover:bg-white/20 hover:text-primary-foreground px-5 py-6 rounded-full flex items-center gap-2 font-medium h-auto backdrop-blur whitespace-nowrap"
+                >
+                  <Download className="h-5 w-5" /> Download Summary
+                </Button>
+                <Button
+                  onClick={proceed}
+                  className="bg-white text-gray-900 hover:bg-white/95 px-6 py-6 rounded-full flex items-center gap-2 font-medium shadow-lg hover:shadow-xl h-auto transition-all whitespace-nowrap"
+                >
+                  <CreditCard className="h-5 w-5" /> Confirm Booking
+                </Button>
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button
-                onClick={downloadPdf}
-                variant="outline"
-                className="bg-white/10 border-white/30 text-primary-foreground hover:bg-white/20 hover:text-primary-foreground px-5 py-6 rounded-full flex items-center gap-2 font-medium h-auto backdrop-blur"
-              >
-                <Download className="h-5 w-5" /> Download Summary
-              </Button>
-              <Button
-                onClick={proceed}
-                className="bg-gradient-gold text-primary-foreground hover:opacity-90 px-6 py-6 rounded-full flex items-center gap-2 font-medium shadow-soft h-auto"
-              >
-                <CreditCard className="h-5 w-5" /> Confirm Booking
-              </Button>
+
+            {/* WHATSAPP CONTACT CARD - INSIDE FINAL AMOUNT */}
+            <div className="border-t border-white/20 pt-6">
+              <div className="bg-white/10 backdrop-blur rounded-2xl p-6">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 rounded-full bg-white/20">
+                      <MessageCircle className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-lg">Confirm via WhatsApp</h3>
+                      <p className="text-xs opacity-75 mt-0.5">Direct confirmation with Sathya Mahal team</p>
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div className="flex items-center gap-2 bg-white/10 rounded-lg p-3">
+                      <Phone className="h-4 w-4" />
+                      <div>
+                        <p className="text-xs uppercase tracking-widest opacity-70">WhatsApp</p>
+                        <p className="font-mono text-sm">+91 7200 101 470</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 bg-white/10 rounded-lg p-3">
+                      <MapPin className="h-4 w-4" />
+                      <div>
+                        <p className="text-xs uppercase tracking-widest opacity-70">Venue</p>
+                        <p className="font-serif text-sm">Sathya Mahal</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={() => window.open(`https://wa.me/${OWNER_WHATSAPP}?text=Hello%20Sathya%20Mahal%2C%20I%20would%20like%20to%20confirm%20my%20booking%20for%20${state.date?.toLocaleDateString()}%20for%20${state.functionType}%20event.%20Name%3A%20${state.customerName}%2C%20Phone%3A%20${state.phone}`, "_blank")}
+                    className="w-full h-12 rounded-full bg-[#25D366] text-white hover:bg-[#20bd5a] text-sm font-medium flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl whitespace-nowrap"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    Chat on WhatsApp Now
+                  </Button>
+                  
+                  <p className="text-xs text-center opacity-75">
+                    Our team responds within minutes (9 AM - 6 PM IST)
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

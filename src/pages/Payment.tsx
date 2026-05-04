@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Upload, CheckCircle2, MessageCircle, ImageIcon } from "lucide-react";
+import { Upload, CheckCircle2, MessageCircle, ImageIcon, Calendar, User, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -70,6 +70,55 @@ export default function Payment() {
           subtitle="Scan the GPay QR, pay the advance, then upload your payment screenshot to confirm."
         />
 
+        {/* USER DETAILS & DATE OVERVIEW */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-5xl mx-auto mb-8"
+        >
+          <div className="glass-card rounded-3xl p-6 md:p-8">
+            <h3 className="font-serif text-xl mb-6">Your Booking Details</h3>
+            <div className="grid sm:grid-cols-4 gap-4">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-blue-100">
+                  <User className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Name</p>
+                  <p className="font-serif text-lg text-foreground">{state.customerName || "—"}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-green-100">
+                  <Phone className="h-5 w-5 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Phone</p>
+                  <p className="font-serif text-lg text-foreground">{state.phone || "—"}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-purple-100">
+                  <Calendar className="h-5 w-5 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Event Date</p>
+                  <p className="font-serif text-lg text-foreground">{state.date ? state.date.toLocaleDateString() : "—"}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-orange-100">
+                  <span className="text-orange-600 font-bold">₹</span>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground">Total Amount</p>
+                  <p className="font-serif text-lg text-foreground font-bold">₹{total.toLocaleString()}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* QR / Owner details */}
           <motion.div
@@ -96,6 +145,19 @@ export default function Payment() {
             <div className="mt-6 p-4 rounded-2xl bg-gradient-luxe text-primary-foreground">
               <p className="text-xs uppercase tracking-widest opacity-70">Amount to Pay</p>
               <p className="font-serif text-4xl">₹{total.toLocaleString()}</p>
+            </div>
+
+            {/* WHATSAPP QUICK CONTACT */}
+            <div className="mt-6 p-4 rounded-2xl bg-green-50 border-2 border-green-200">
+              <p className="text-xs uppercase tracking-widest text-green-700 font-semibold mb-2">WhatsApp Support</p>
+              <p className="text-sm text-gray-700 mb-3">Need help? Chat with us directly</p>
+              <Button
+                onClick={() => window.open(`https://wa.me/${OWNER_WHATSAPP}`, "_blank")}
+                className="w-full h-10 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-medium flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Open WhatsApp
+              </Button>
             </div>
           </motion.div>
 
