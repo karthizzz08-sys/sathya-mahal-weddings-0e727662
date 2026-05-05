@@ -180,40 +180,6 @@ export default function Summary() {
       <SectionTitle eyebrow="Final Step" title="Booking Summary" subtitle="Review your selections and confirm via WhatsApp." />
 
       <div className="max-w-3xl mx-auto space-y-6">
-        {/* USER DETAILS CARD */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ delay: 0.1 }}
-          className="glass-card rounded-3xl p-8"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-3 rounded-full bg-gradient-gold/20">
-              <User className="h-6 w-6 gold-text" />
-            </div>
-            <h3 className="font-serif text-2xl">Your Details</h3>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 gap-6">
-            <div className="space-y-1">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground">Full Name</p>
-              <p className="font-serif text-lg">{state.customerName || "—"}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground">Phone Number</p>
-              <p className="font-serif text-lg">{state.phone || "—"}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground">Event Type</p>
-              <p className="font-serif text-lg capitalize">{state.functionType || "—"}</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground">Guest Count</p>
-              <p className="font-serif text-lg">{state.guests} Guests</p>
-            </div>
-          </div>
-        </motion.div>
-
         {/* SELECTED DATE HIGHLIGHT */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 

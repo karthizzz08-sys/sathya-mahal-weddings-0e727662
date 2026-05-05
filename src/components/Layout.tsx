@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Menu, X } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/logooo.jpeg";
+import ContactModal from "./ContactModal";
 
 const links = [
   { to: "/", label: "Home" },
@@ -88,6 +89,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           <p className="text-sm opacity-60">© {new Date().getFullYear()} Sathya Mahal. All rights reserved.</p>
         </div>
       </footer>
+
+      <ContactModal />
 
       <a
         href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20Sathya%20Mahal"
