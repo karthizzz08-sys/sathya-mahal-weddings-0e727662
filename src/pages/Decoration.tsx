@@ -4,28 +4,40 @@ import SectionTitle from "@/components/SectionTitle";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
-import featureHall from "@/assets/feature-hall.jpg";
-import featureDining from "@/assets/feature-dining.jpg";
-import featureAc from "@/assets/feature-ac.jpg";
-import featureParking from "@/assets/feature-parking.jpg";
+import decor1 from "@/assets/ChatGPT Image May 4, 2026, 11_03_46 PM.png";
+import decor2 from "@/assets/ChatGPT Image May 4, 2026, 11_12_12 PM.png";
+import decor3 from "@/assets/ChatGPT Image May 4, 2026, 11_14_20 PM.png";
+import decor4 from "@/assets/ChatGPT Image May 4, 2026, 11_17_05 PM.png";
+import decor5 from "@/assets/ChatGPT Image May 4, 2026, 11_19_02 PM.png";
+import decor6 from "@/assets/ChatGPT Image May 4, 2026, 11_19_57 PM.png";
+import decor7 from "@/assets/ChatGPT Image May 4, 2026, 11_20_44 PM.png";
+import decor8 from "@/assets/ChatGPT Image May 4, 2026, 11_22_14 PM.png";
+import decor9 from "@/assets/ChatGPT Image May 4, 2026, 11_23_41 PM.png";
+import decor10 from "@/assets/ChatGPT Image May 4, 2026, 11_25_33 PM.png";
+import decor11 from "@/assets/ChatGPT Image May 4, 2026, 11_26_11 PM.png";
+import decor12 from "@/assets/ChatGPT Image May 4, 2026, 11_27_50 PM.png";
+import decor13 from "@/assets/ChatGPT Image May 4, 2026, 11_27_59 PM.png";
+import decor14 from "@/assets/ChatGPT Image May 4, 2026, 11_29_33 PM.png";
+import decor15 from "@/assets/ChatGPT Image May 4, 2026, 11_30_56 PM.png";
+import decor16 from "@/assets/wedding_stage_enhanced.png";
 
 const decorationStyles = [
-  { id: "style-1", name: "Royal Golden Setup", image: featureHall, price: 5000 },
-  { id: "style-2", name: "Classic Floral Arch", image: featureDining, price: 5000 },
-  { id: "style-3", name: "Modern Minimalist", image: featureAc, price: 5000 },
-  { id: "style-4", name: "Traditional Mandap", image: featureParking, price: 5000 },
-  { id: "style-5", name: "Garden Theme", image: featureHall, price: 5000 },
-  { id: "style-6", name: "Crystal & Lights", image: featureDining, price: 5000 },
-  { id: "style-7", name: "Rose Petals Design", image: featureAc, price: 5000 },
-  { id: "style-8", name: "Grand Entrance", image: featureParking, price: 5000 },
-  { id: "style-9", name: "Marigold Elegance", image: featureHall, price: 5000 },
-  { id: "style-10", name: "Pearl & Diamond", image: featureDining, price: 5000 },
-  { id: "style-11", name: "Tropical Paradise", image: featureAc, price: 5000 },
-  { id: "style-12", name: "Gold & Maroon", image: featureParking, price: 5000 },
-  { id: "style-13", name: "Floral Cascade", image: featureHall, price: 5000 },
-  { id: "style-14", name: "Baroque Luxury", image: featureDining, price: 5000 },
-  { id: "style-15", name: "Nature Inspired", image: featureAc, price: 5000 },
-  { id: "style-16", name: "Silver Elegance", image: featureParking, price: 5000 },
+  { id: "style-1", name: "Royal Golden Setup", image: decor1, price: 5000 },
+  { id: "style-2", name: "Classic Floral Arch", image: decor2, price: 5000 },
+  { id: "style-3", name: "Modern Minimalist", image: decor3, price: 5000 },
+  { id: "style-4", name: "Traditional Mandap", image: decor4, price: 5000 },
+  { id: "style-5", name: "Garden Theme", image: decor5, price: 5000 },
+  { id: "style-6", name: "Crystal & Lights", image: decor6, price: 5000 },
+  { id: "style-7", name: "Rose Petals Design", image: decor7, price: 5000 },
+  { id: "style-8", name: "Grand Entrance", image: decor8, price: 5000 },
+  { id: "style-9", name: "Marigold Elegance", image: decor9, price: 5000 },
+  { id: "style-10", name: "Pearl & Diamond", image: decor10, price: 5000 },
+  { id: "style-11", name: "Tropical Paradise", image: decor11, price: 5000 },
+  { id: "style-12", name: "Gold & Maroon", image: decor12, price: 5000 },
+  { id: "style-13", name: "Floral Cascade", image: decor13, price: 5000 },
+  { id: "style-14", name: "Baroque Luxury", image: decor14, price: 5000 },
+  { id: "style-15", name: "Nature Inspired", image: decor15, price: 5000 },
+  { id: "style-16", name: "Silver Elegance", image: decor16, price: 5000 },
 ];
 
 export default function Decoration() {
