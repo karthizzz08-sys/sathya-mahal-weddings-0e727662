@@ -48,17 +48,43 @@ export default function Home() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center gap-4"
+          className="flex flex-col items-center gap-8 w-full"
         >
-          <p className="text-sm uppercase tracking-widest text-accent font-semibold">Ready to Celebrate?</p>
-          <Button 
-            asChild 
-            size="lg" 
-            className="bg-gradient-gold text-primary-foreground hover:opacity-90 rounded-full px-12 h-14 shadow-gold transition-all duration-300 hover:shadow-xl hover:scale-105"
-          >
-            <Link to="/availability">Check Availability</Link>
-          </Button>
-          <p className="text-xs text-muted-foreground mt-2">Reserve your perfect date today</p>
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-sm uppercase tracking-widest text-accent font-semibold">Ready to Celebrate?</p>
+            <Button 
+              asChild 
+              size="lg" 
+              className="bg-gradient-gold text-primary-foreground hover:opacity-90 rounded-full px-12 h-14 shadow-gold transition-all duration-300 hover:shadow-xl hover:scale-105"
+            >
+              <Link to="/availability">Check Availability</Link>
+            </Button>
+            <p className="text-xs text-muted-foreground mt-2">Reserve your perfect date today</p>
+          </div>
+
+          {/* AMENITIES HIGHLIGHTS - 4 ITEMS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-4xl px-4">
+            {[
+              "Prestigious Grand Hall",
+              "Large Parking Facilities",
+              "Opulent Air Conditioning",
+              "Spacious Dining Hall"
+            ].map((amenity, i) => (
+              <motion.div
+                key={amenity}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-primary/5 transition-colors duration-300"
+              >
+                <div className="w-10 h-10 rounded-full bg-gradient-gold flex items-center justify-center text-primary-foreground text-sm font-serif">
+                  ✨
+                </div>
+                <p className="text-xs md:text-sm font-semibold text-foreground text-center leading-tight">{amenity}</p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </section>
 
