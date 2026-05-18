@@ -209,7 +209,7 @@ export default function Home() {
             {/* Map */}
             <div className="rounded-2xl overflow-hidden shadow-lg h-96 md:h-full min-h-96">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.0!2d78.0!3d17.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb8e0!3d0!8m2!3d17.360589!4d78.474434!5e0!3m2!1sen!2sin!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.148055926145!2d78.47443749999999!3d17.360589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sSathya%20Mahal!2s!5e0!3m2!1sen!2sin!4v1234567890"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: "400px" }}
@@ -266,7 +266,7 @@ export default function Home() {
               </div>
 
               <Button asChild className="bg-gradient-gold text-primary-foreground hover:opacity-90 rounded-full w-full h-12">
-                <a href="https://www.google.com/maps/search/Sathya+Mahal" target="_blank" rel="noopener noreferrer">
+                <a href="https://maps.app.goo.gl/nGDX4jhWmm2GT4G39?g_st=ac" target="_blank" rel="noopener noreferrer">
                   View on Google Maps →
                 </a>
               </Button>
