@@ -5,6 +5,8 @@ import featureHall from "@/assets/feature-hall.jpg";
 import featureDining from "@/assets/feature-dining.jpg";
 import featureAc from "@/assets/feature-ac.jpg";
 import featureParking from "@/assets/feature-parking.jpg";
+import galleryBallroom from "@/assets/ChatGPT Image May 18, 2026, 06_56_48 PM.png";
+import galleryDiningHall from "@/assets/ChatGPT Image May 18, 2026, 07_18_48 PM.png";
 import SectionTitle from "@/components/SectionTitle";
 import AmenitiesShowcase from "@/components/AmenitiesShowcase";
 import { Button } from "@/components/ui/button";
@@ -20,8 +22,8 @@ const gallery = [
   { image: featureDining, title: "Dining Hall" },
   { image: featureAc, title: "Hall Ambiance" },
   { image: featureParking, title: "Decorated Entry" },
-  { image: featureHall, title: "Reception Area" },
-  { image: featureDining, title: "Decorated Venue" },
+  { image: galleryBallroom, title: "Elegant Venue Ballroom" },
+  { image: galleryDiningHall, title: "Spacious Dining Area" },
 ];
 
 const djVideos = [
@@ -38,6 +40,27 @@ export default function Home() {
     <>
       {/* PREMIUM AMENITIES SHOWCASE */}
       <AmenitiesShowcase />
+
+      {/* AVAILABILITY CTA SECTION - CENTERED EMPTY SPACE */}
+      <section className="w-full py-16 md:py-20 flex justify-center items-center bg-white/50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center gap-4"
+        >
+          <p className="text-sm uppercase tracking-widest text-accent font-semibold">Ready to Celebrate?</p>
+          <Button 
+            asChild 
+            size="lg" 
+            className="bg-gradient-gold text-primary-foreground hover:opacity-90 rounded-full px-12 h-14 shadow-gold transition-all duration-300 hover:shadow-xl hover:scale-105"
+          >
+            <Link to="/availability">Check Availability</Link>
+          </Button>
+          <p className="text-xs text-muted-foreground mt-2">Reserve your perfect date today</p>
+        </motion.div>
+      </section>
 
       {/* PLANS PREVIEW */}
       <section className="container py-24">
