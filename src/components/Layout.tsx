@@ -33,13 +33,14 @@ export default function Layout({ children }: { children: ReactNode }) {
               <NavLink
                 key={l.to}
                 to={l.to}
-                className={({ isActive }) =>
-                  `px-4 py-2 text-sm font-medium rounded-full transition-all ${
-                    isActive
-                      ? "bg-gradient-gold text-primary-foreground shadow-soft"
+                className={({ isActive }) => {
+                  const isAvailability = l.to === "/availability";
+                  return `px-4 py-2 text-sm font-medium rounded-full transition-all ${
+                    isAvailability || isActive
+                      ? "bg-gradient-gold text-primary-foreground shadow-soft font-bold"
                       : "text-foreground/70 hover:text-primary hover:bg-secondary/60"
-                  }`
-                }
+                  }`;
+                }}
               >
                 {l.label}
               </NavLink>
@@ -57,9 +58,14 @@ export default function Layout({ children }: { children: ReactNode }) {
                   key={l.to}
                   to={l.to}
                   onClick={() => setOpen(false)}
-                  className={({ isActive }) =>
-                    `px-4 py-3 rounded-lg ${isActive ? "bg-gradient-gold text-primary-foreground" : "hover:bg-secondary"}`
-                  }
+                  className={({ isActive }) => {
+                    const isAvailability = l.to === "/availability";
+                    return `px-4 py-3 rounded-lg font-medium transition-all ${
+                      isAvailability || isActive
+                        ? "bg-gradient-gold text-primary-foreground font-bold"
+                        : "text-foreground/70 hover:bg-secondary"
+                    }`;
+                  }}
                 >
                   {l.label}
                 </NavLink>
@@ -93,7 +99,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <ContactModal />
 
       <a
-        href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20Sathya%20Mahal"
+        href="https://wa.me/917502215551?text=Hello%2C%20I%20want%20to%20book%20Sathya%20Mahal"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-gold hover:scale-110 transition-transform animate-float"

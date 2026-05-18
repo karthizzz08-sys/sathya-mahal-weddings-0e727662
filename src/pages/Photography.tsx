@@ -379,13 +379,13 @@ export default function Photography() {
           </div>
           <p className="text-muted-foreground mb-6">Contact us on WhatsApp for package details and custom quotes</p>
           <a
-            href="https://wa.me/917200101470"
+            href="https://wa.me/917502215551"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-8 py-3 rounded-full font-semibold hover:opacity-90 transition-all shadow-lg"
           >
             <MessageCircle className="h-5 w-5" />
-            Chat on WhatsApp: +91 7200101470
+            Chat on WhatsApp: +91 7502215551
           </a>
         </motion.div>
 

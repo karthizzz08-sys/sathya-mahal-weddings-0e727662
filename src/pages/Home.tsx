@@ -201,7 +201,7 @@ export default function Home() {
                   <div className="text-primary text-2xl">💬</div>
                   <div>
                     <p className="font-semibold text-foreground">WhatsApp</p>
-                    <a href="https://wa.me/917200101470" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
+                    <a href="https://wa.me/917502215551" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">
                       Chat with us
                     </a>
                   </div>

@@ -9,7 +9,7 @@ interface FormData {
   eventDate: string;
 }
 
-const WHATSAPP_NUMBER = "7200101470";
+const WHATSAPP_NUMBER = "7502215551";
 
 export default function ContactModal() {
   const [isOpen, setIsOpen] = useState(false);
