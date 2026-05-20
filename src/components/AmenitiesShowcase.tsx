@@ -5,12 +5,14 @@ import featureHall from "@/assets/feature-hall.jpg";
 import featureDining from "@/assets/feature-dining.jpg";
 import featureAc from "@/assets/feature-ac.jpg";
 import featureParking from "@/assets/feature-parking.jpg";
+import matrimonyImg from "../assets/matrimony.jpeg";
 import logo from "@/assets/logooo.jpeg";
 
 interface AmenityItem {
   id: string;
   title: string;
   image: string;
+  url?: string;
 }
 
 const amenities: AmenityItem[] = [
@@ -31,8 +33,9 @@ const amenities: AmenityItem[] = [
   },
   {
     id: "dining",
-    title: "Spacious Dining Hall",
-    image: featureDining,
+    title: "Find My Match",
+    image: matrimonyImg,
+    url: "https://glow-beauty-hub-phi.vercel.app/",
   },
 ];
 
@@ -86,34 +89,56 @@ export default function AmenitiesShowcase() {
       />
       <div className="amenities-container">
         <div className="amenities-grid">
-          {amenities.map((amenity, index) => (
-            <div
-              key={amenity.id}
-              className="amenity-card"
-              ref={(el) => {
-                cardsRef.current[index] = el;
-              }}
-              onClick={() => navigate("/amenities")}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="amenity-image-wrapper">
-                <img
-                  src={amenity.image}
-                  alt={amenity.title}
-                  className="amenity-image"
-                  loading="lazy"
-                />
-              </div>
+          {amenities.map((amenity, index) => {
+            const cardContent = (
+              <div
+                className="amenity-card"
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="amenity-image-wrapper">
+                  <img
+                    src={amenity.image}
+                    alt={amenity.title}
+                    className="amenity-image"
+                    loading="lazy"
+                  />
+                </div>
 
-              <div className="amenity-overlay" />
+                <div className="amenity-overlay" />
 
-              <div className="amenity-content">
-                <div className="amenity-text-wrapper">
-                  <h3 className="amenity-title-text">{amenity.title}</h3>
+                <div className="amenity-content">
+                  <div className="amenity-text-wrapper">
+                    <h3 className="amenity-title-text">{amenity.title}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+
+            if (amenity.url) {
+              return (
+                <a
+                  key={amenity.id}
+                  href={amenity.url}
+                  target="_self"
+                  style={{ textDecoration: "none", display: "block" }}
+                >
+                  {cardContent}
+                </a>
+              );
+            }
+
+            return (
+              <div
+                key={amenity.id}
+                onClick={() => navigate("/amenities")}
+              >
+                {cardContent}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
