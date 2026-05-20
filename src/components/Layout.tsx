@@ -15,6 +15,7 @@ const links = [
   { to: "/catering", label: "Catering" },
   { to: "/addons", label: "Add-ons" },
   { to: "/summary", label: "Summary" },
+  { to: "https://glow-beauty-hub-phi.vercel.app/", label: "Matrimony", external: true },
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -29,22 +30,34 @@ export default function Layout({ children }: { children: ReactNode }) {
             <img src={logo} alt="Sathya Mahal Logo" className="h-20 w-20 object-contain" />
           </Link>
           <nav className="hidden lg:flex items-center gap-1">
-            {links.map(l => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                className={({ isActive }) => {
-                  const isAvailability = l.to === "/availability";
-                  return `px-4 py-2 text-sm font-medium rounded-full transition-all ${
-                    isAvailability || isActive
-                      ? "bg-gradient-gold text-primary-foreground shadow-soft font-bold"
-                      : "text-foreground/70 hover:text-primary hover:bg-secondary/60"
-                  }`;
-                }}
-              >
-                {l.label}
-              </NavLink>
-            ))}
+            {links.map(l => 
+              l.external ? (
+                <a
+                  key={l.to}
+                  href={l.to}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 text-sm font-medium rounded-full transition-all text-foreground/70 hover:text-primary hover:bg-secondary/60"
+                >
+                  {l.label}
+                </a>
+              ) : (
+                <NavLink
+                  key={l.to}
+                  to={l.to}
+                  className={({ isActive }) => {
+                    const isAvailability = l.to === "/availability";
+                    return `px-4 py-2 text-sm font-medium rounded-full transition-all ${
+                      isAvailability || isActive
+                        ? "bg-gradient-gold text-primary-foreground shadow-soft font-bold"
+                        : "text-foreground/70 hover:text-primary hover:bg-secondary/60"
+                    }`;
+                  }}
+                >
+                  {l.label}
+                </NavLink>
+              )
+            )}
           </nav>
           <button onClick={() => setOpen(!open)} className="lg:hidden p-2 text-primary">
             {open ? <X /> : <Menu />}
@@ -53,23 +66,35 @@ export default function Layout({ children }: { children: ReactNode }) {
         {open && (
           <div className="lg:hidden border-t border-border/50 bg-background/95 backdrop-blur">
             <div className="container py-4 flex flex-col gap-1">
-              {links.map(l => (
-                <NavLink
-                  key={l.to}
-                  to={l.to}
-                  onClick={() => setOpen(false)}
-                  className={({ isActive }) => {
-                    const isAvailability = l.to === "/availability";
-                    return `px-4 py-3 rounded-lg font-medium transition-all ${
-                      isAvailability || isActive
-                        ? "bg-gradient-gold text-primary-foreground font-bold"
-                        : "text-foreground/70 hover:bg-secondary"
-                    }`;
-                  }}
-                >
-                  {l.label}
-                </NavLink>
-              ))}
+              {links.map(l =>
+                l.external ? (
+                  <a
+                    key={l.to}
+                    href={l.to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-3 rounded-lg font-medium transition-all text-foreground/70 hover:bg-secondary"
+                  >
+                    {l.label}
+                  </a>
+                ) : (
+                  <NavLink
+                    key={l.to}
+                    to={l.to}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) => {
+                      const isAvailability = l.to === "/availability";
+                      return `px-4 py-3 rounded-lg font-medium transition-all ${
+                        isAvailability || isActive
+                          ? "bg-gradient-gold text-primary-foreground font-bold"
+                          : "text-foreground/70 hover:bg-secondary"
+                      }`;
+                    }}
+                  >
+                    {l.label}
+                  </NavLink>
+                )
+              )}
             </div>
           </div>
         )}
