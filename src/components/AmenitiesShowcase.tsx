@@ -35,7 +35,7 @@ const amenities: AmenityItem[] = [
     id: "dining",
     title: "Find My Match",
     image: matrimonyImg,
-    url: "https://glow-beauty-hub-phi.vercel.app/",
+    url: "https://chettiar-connect-soulmate.lovable.app",
   },
 ];
 
