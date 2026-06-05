@@ -131,7 +131,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         href="https://wa.me/917502215551?text=Hello%2C%20I%20want%20to%20book%20Sathya%20Mahal"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-gold hover:scale-110 transition-transform animate-float"
+        className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-gold hover:scale-110 transition-transform animate-float"
         aria-label="WhatsApp"
       >
         <MessageCircle className="h-6 w-6" />
