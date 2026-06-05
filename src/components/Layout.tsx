@@ -15,7 +15,7 @@ const links = [
   { to: "/catering", label: "Catering" },
   { to: "/addons", label: "Add-ons" },
   { to: "/summary", label: "Summary" },
-  { to: "https://chettiar-connect-soulmate.lovable.app/", label: "Matrimony", external: true },
+  { to: "https://chettiar-connect-9a24a9d5.vercel.app/", label: "Matrimony", external: true },
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {
