@@ -1,6 +1,6 @@
 import { useBooking } from "@/context/BookingContext";
 import { motion } from "framer-motion";
-import { Gift, TrendingUp, CheckCircle2, X } from "lucide-react";
+import { Gift, TrendingUp, CheckCircle2, X, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,20 @@ export default function GrandTotalCard() {
   // MOBILE: Floating Ball Version
   return (
     <>
-      {/* Mobile Floating Ball (visible only on mobile) */}
+      {/* Mobile WhatsApp Floating Button */}
+      <motion.a
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileTap={{ scale: 0.95 }}
+        href={`https://wa.me/917200101470?text=Hello%20Sathya%20Mahal%2C%20I%20would%20like%20to%20inquire%20about%20booking.`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="md:hidden fixed bottom-24 right-4 z-40 h-16 w-16 rounded-full bg-[#25D366] shadow-lg shadow-[#25D366]/40 flex items-center justify-center text-white hover:shadow-xl transition-all hover:bg-[#20bd5a]"
+      >
+        <MessageCircle className="h-8 w-8" />
+      </motion.a>
+
+      {/* Mobile Booking Floating Ball */}
       <motion.button
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
