@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { CreditCard, Download, CheckCircle2, Calendar, User, MessageCircle, Phone, MapPin } from "lucide-react";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
@@ -165,7 +166,8 @@ export default function Summary() {
   return (
     <>
     <PageLoader show={loading} label="Opening payment…" />
-    <section className="container py-16 md:py-24">
+    <GrandTotalCard />
+    <section className="container py-16 md:py-24 pb-32">
       {/* LOGO SECTION */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}

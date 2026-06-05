@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ChefHat, CheckCircle2, Radio, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -209,8 +210,9 @@ export default function Catering() {
   return (
     <>
       <PageLoader show={loading} label="Loading Add-ons…" />
+      <GrandTotalCard />
       {/* CATERING HERO IMAGES */}
-      <section className="container py-12 md:py-16">
+      <section className="container py-12 md:py-16 pb-32">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <motion.div

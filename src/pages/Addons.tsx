@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -52,7 +53,8 @@ export default function Addons() {
   return (
     <>
       <PageLoader show={loading} label="Loading Summary…" />
-      <section className="container py-16 md:py-24">
+      <GrandTotalCard />
+      <section className="container py-16 md:py-24 pb-32">
       <SectionTitle eyebrow="Step 6" title="Add-Ons" subtitle="Sprinkle your celebration with delightful traditions." />
 
       <div className="max-w-5xl mx-auto space-y-12">

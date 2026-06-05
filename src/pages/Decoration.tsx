@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -52,7 +53,8 @@ export default function Decoration() {
   return (
     <>
       <PageLoader show={loading} label="Loading Catering…" />
-      <section className="container py-16 md:py-24">
+      <GrandTotalCard />
+      <section className="container py-16 md:py-24 pb-32">
         <SectionTitle eyebrow="Step 4" title="Decoration Styles" subtitle="Select your preferred decoration theme for the event." />
 
       <div className="max-w-6xl mx-auto">

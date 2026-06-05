@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Check, Crown, Zap, Sparkles, Flame, Power } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -44,7 +45,8 @@ export default function Plans() {
   return (
     <>
     <PageLoader show={loading} label="Loading Photography…" />
-    <section className="container py-12 md:py-24">
+    <GrandTotalCard />
+    <section className="container py-12 md:py-24 pb-32">
       <SectionTitle eyebrow="Step 2" title="Hall Plans" subtitle="Choose the perfect package for your celebration." />
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6 max-w-6xl mx-auto">
         {plans.map((p, i) => {

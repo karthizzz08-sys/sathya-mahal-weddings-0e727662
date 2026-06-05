@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import SectionTitle from "@/components/SectionTitle";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -63,7 +64,8 @@ export default function Payment() {
   return (
     <>
       <PageLoader show={loading} label="Opening WhatsApp…" />
-      <section className="container py-16 md:py-24">
+      <GrandTotalCard />
+      <section className="container py-16 md:py-24 pb-32">
         <SectionTitle
           eyebrow="Payment"
           title="Pay & Confirm"

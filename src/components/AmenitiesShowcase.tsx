@@ -48,8 +48,8 @@ export default function AmenitiesShowcase() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
+            (entry.target as HTMLElement).style.opacity = "1";
+            (entry.target as HTMLElement).style.transform = "translateY(0)";
           }
         });
       },
@@ -58,8 +58,8 @@ export default function AmenitiesShowcase() {
 
     cardsRef.current.forEach((card) => {
       if (card) {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(30px)";
+        (card as HTMLDivElement).style.opacity = "0";
+        (card as HTMLDivElement).style.transform = "translateY(30px)";
         observer.observe(card);
       }
     });

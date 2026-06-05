@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -229,7 +230,8 @@ export default function Photography() {
   return (
     <>
       <PageLoader show={loading} label="Loading Decoration…" />
-      <section className="container py-12 md:py-24">
+      <GrandTotalCard />
+      <section className="container py-12 md:py-24 pb-32">
         <SectionTitle
           eyebrow="Step 3"
           title="Photography Packages"

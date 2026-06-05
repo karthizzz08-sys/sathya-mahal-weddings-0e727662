@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SectionTitle from "@/components/SectionTitle";
+import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -31,7 +32,8 @@ export default function Availability() {
   return (
     <>
       <PageLoader show={loading} label="Loading Plans…" />
-      <section className="container py-16 md:py-24">
+      <GrandTotalCard />
+      <section className="container py-16 md:py-24 pb-32">
       <SectionTitle eyebrow="Step 1" title="Check Availability" subtitle="Pick your auspicious date and share your details." />
       <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} className="glass-card rounded-3xl p-6 md:p-8">
