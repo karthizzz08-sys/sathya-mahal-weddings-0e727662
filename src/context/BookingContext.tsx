@@ -22,6 +22,9 @@ export interface BookingState {
   morningMenu: string | null;
   lunchMenu: string | null;
   eveningMenu: string | null;
+  morningMenuTotal: number;
+  lunchMenuTotal: number;
+  eveningMenuTotal: number;
 }
 
 interface Ctx {
@@ -52,6 +55,9 @@ const initial: BookingState = {
   morningMenu: null,
   lunchMenu: null,
   eveningMenu: null,
+  morningMenuTotal: 0,
+  lunchMenuTotal: 0,
+  eveningMenuTotal: 0,
 };
 
 const BookingCtx = createContext<Ctx | null>(null);
@@ -71,9 +77,9 @@ export const BookingProvider = ({ children }: { children: ReactNode }) => {
     (state.plan?.price || 0) +
     (state.photography?.price || 0) +
     state.decoration.reduce((a, b) => a + b.price, 0) +
-    (state.tiffen ? state.tiffen.price * state.guests : 0) +
-    (state.lunch ? state.lunch.price * state.guests : 0) +
-    (state.evening ? state.evening.price * state.guests : 0) +
+    state.morningMenuTotal +
+    state.lunchMenuTotal +
+    state.eveningMenuTotal +
     (state.catering.meal ? state.catering.meal.price * state.catering.guests : 0) +
     state.addons.reduce((a, b) => a + b.price, 0) +
     state.extras.reduce((a, b) => a + b.price, 0) +

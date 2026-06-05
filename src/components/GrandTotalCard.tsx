@@ -12,10 +12,15 @@ export default function GrandTotalCard() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Collect selected items for display
+  const cateringSubtotal = state.morningMenuTotal + state.lunchMenuTotal + state.eveningMenuTotal;
   const selectedItems = [
     state.plan && { name: state.plan.name, price: state.plan.price },
     state.photography && { name: state.photography.name, price: state.photography.price },
     ...state.decoration.map(d => ({ name: d.name, price: d.price })),
+    cateringSubtotal > 0 && { 
+      name: `Catering Subtotal (Menus)`, 
+      price: cateringSubtotal 
+    },
     state.catering.meal && { 
       name: `${state.catering.meal.name} × ${state.catering.guests} guests`, 
       price: state.catering.meal.price * state.catering.guests 

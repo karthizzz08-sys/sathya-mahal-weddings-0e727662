@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChefHat, CheckCircle2, Radio, Minus, Plus, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -178,34 +178,55 @@ const eveningMenus = [
 ];
 
 export default function Catering() {
-  const [selectedMenu, setSelectedMenu] = useState("menu-1");
-  const [selectedLunchMenu, setSelectedLunchMenu] = useState("lunch-1");
-  const [selectedEveningMenu, setSelectedEveningMenu] = useState("evening-1");
+  const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
+  const [selectedLunchMenu, setSelectedLunchMenu] = useState<string | null>(null);
+  const [selectedEveningMenu, setSelectedEveningMenu] = useState<string | null>(null);
   const [guestQuantity, setGuestQuantity] = useState(250);
   const { set, total } = useBooking();
   const { loading, go } = useTransitionNav(700);
 
   // Calculate total price based on selected menus and guest quantity
-  const selectedMenuData = menus.find((m) => m.id === selectedMenu);
-  const selectedLunchData = lunchMenus.find((m) => m.id === selectedLunchMenu);
-  const selectedEveningData = eveningMenus.find((m) => m.id === selectedEveningMenu);
+  const selectedMenuData = selectedMenu ? menus.find((m) => m.id === selectedMenu) : null;
+  const selectedLunchData = selectedLunchMenu ? lunchMenus.find((m) => m.id === selectedLunchMenu) : null;
+  const selectedEveningData = selectedEveningMenu ? eveningMenus.find((m) => m.id === selectedEveningMenu) : null;
 
   const morningTotal = selectedMenuData ? selectedMenuData.price * guestQuantity : 0;
   const lunchTotal = selectedLunchData ? selectedLunchData.price * guestQuantity : 0;
   const eveningTotal = selectedEveningData ? selectedEveningData.price * guestQuantity : 0;
   const cateringSubtotal = morningTotal + lunchTotal + eveningTotal;
 
-  const handleContinue = () => {
-    const tiffen = menus.find((m) => m.id === selectedMenu);
-    const lunch = lunchMenus.find((m) => m.id === selectedLunchMenu);
-    const evening = eveningMenus.find((m) => m.id === selectedEveningMenu);
-    if (tiffen && lunch && evening) {
-      set("tiffen", { id: tiffen.id, name: tiffen.name, price: tiffen.price });
-      set("lunch", { id: lunch.id, name: lunch.name, price: lunch.price });
-      set("evening", { id: evening.id, name: evening.name, price: evening.price });
-      set("guests", guestQuantity);
-      go("/addons");
+  // Update context in real-time as user makes selections
+  useEffect(() => {
+    if (selectedMenuData) {
+      set("tiffen", { id: selectedMenuData.id, name: selectedMenuData.name, price: selectedMenuData.price });
+      set("morningMenuTotal", morningTotal);
+    } else {
+      set("morningMenuTotal", 0);
     }
+    
+    if (selectedLunchData) {
+      set("lunch", { id: selectedLunchData.id, name: selectedLunchData.name, price: selectedLunchData.price });
+      set("lunchMenuTotal", lunchTotal);
+    } else {
+      set("lunchMenuTotal", 0);
+    }
+    
+    if (selectedEveningData) {
+      set("evening", { id: selectedEveningData.id, name: selectedEveningData.name, price: selectedEveningData.price });
+      set("eveningMenuTotal", eveningTotal);
+    } else {
+      set("eveningMenuTotal", 0);
+    }
+    
+    set("guests", guestQuantity);
+  }, [selectedMenu, selectedLunchMenu, selectedEveningMenu, guestQuantity, set, selectedMenuData, selectedLunchData, selectedEveningData, morningTotal, lunchTotal, eveningTotal]);
+
+  const handleContinue = () => {
+    if (!selectedMenu || !selectedLunchMenu || !selectedEveningMenu) {
+      alert("Please select all three menus (Morning, Lunch, and Evening) before proceeding.");
+      return;
+    }
+    go("/addons");
   };
 
   return (
@@ -290,7 +311,7 @@ export default function Catering() {
                   whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                   onClick={() => {
                     setSelectedMenu(menu.id);
-                    set("tiffen", { id: menu.id, name: menu.name });
+                    set("tiffen", { id: menu.id, name: menu.name, price: menu.price });
                   }}
                   className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-8 ${
                     isSelected
@@ -401,7 +422,7 @@ export default function Catering() {
                     whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                     onClick={() => {
                       setSelectedLunchMenu(lunch.id);
-                      set("lunch", { id: lunch.id, name: lunch.name });
+                      set("lunch", { id: lunch.id, name: lunch.name, price: lunch.price });
                     }}
                     className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-6 md:p-8 ${
                       isSelected
@@ -513,7 +534,7 @@ export default function Catering() {
                     whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                     onClick={() => {
                       setSelectedEveningMenu(evening.id);
-                      set("evening", { id: evening.id, name: evening.name });
+                      set("evening", { id: evening.id, name: evening.name, price: evening.price });
                     }}
                     className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-8 ${
                       isSelected
@@ -600,7 +621,11 @@ export default function Catering() {
       >
         <div className="container py-4">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex gap-3">
+            <div className="flex gap-3 items-center">
+              <div className="flex flex-col">
+                <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Catering Subtotal</span>
+                <span className="font-serif text-2xl font-bold text-purple-600">₹{cateringSubtotal.toLocaleString()}</span>
+              </div>
               <Link
                 to="/summary"
                 className="rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 px-6 py-4 font-bold uppercase tracking-wider h-auto shadow-lg transition-all flex items-center gap-2 whitespace-nowrap"
