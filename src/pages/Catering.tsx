@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { ChefHat, CheckCircle2, Radio, Minus, Plus, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
 import PageLoader from "@/components/PageLoader";
@@ -232,7 +231,6 @@ export default function Catering() {
   return (
     <>
       <PageLoader show={loading} label="Loading Add-ons…" />
-      <GrandTotalCard />
       {/* CATERING HERO IMAGES */}
       <section className="container py-12 md:py-16 pb-32">
         <div className="max-w-7xl mx-auto">
@@ -310,7 +308,9 @@ export default function Catering() {
                   transition={{ delay: idx * 0.12 }}
                   whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                   onClick={() => {
-                    setSelectedMenu(menu.id);
+                    if (selectedMenu !== menu.id) {
+                      setSelectedMenu(menu.id);
+                    }
                   }}
                   className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-8 ${
                     isSelected
@@ -420,7 +420,9 @@ export default function Catering() {
                     transition={{ delay: idx * 0.12 }}
                     whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                     onClick={() => {
-                      setSelectedLunchMenu(lunch.id);
+                      if (selectedLunchMenu !== lunch.id) {
+                        setSelectedLunchMenu(lunch.id);
+                      }
                     }}
                     className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-6 md:p-8 ${
                       isSelected
@@ -531,7 +533,9 @@ export default function Catering() {
                     transition={{ delay: idx * 0.12 }}
                     whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                     onClick={() => {
-                      setSelectedEveningMenu(evening.id);
+                      if (selectedEveningMenu !== evening.id) {
+                        setSelectedEveningMenu(evening.id);
+                      }
                     }}
                     className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-8 ${
                       isSelected
