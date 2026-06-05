@@ -219,7 +219,7 @@ export default function Catering() {
     }
     
     set("guests", guestQuantity);
-  }, [selectedMenu, selectedLunchMenu, selectedEveningMenu, guestQuantity, set, selectedMenuData, selectedLunchData, selectedEveningData, morningTotal, lunchTotal, eveningTotal]);
+  }, [selectedMenu, selectedLunchMenu, selectedEveningMenu, guestQuantity, set]);
 
   const handleContinue = () => {
     if (!selectedMenu || !selectedLunchMenu || !selectedEveningMenu) {
@@ -311,7 +311,6 @@ export default function Catering() {
                   whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                   onClick={() => {
                     setSelectedMenu(menu.id);
-                    set("tiffen", { id: menu.id, name: menu.name, price: menu.price });
                   }}
                   className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-8 ${
                     isSelected
@@ -422,7 +421,6 @@ export default function Catering() {
                     whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                     onClick={() => {
                       setSelectedLunchMenu(lunch.id);
-                      set("lunch", { id: lunch.id, name: lunch.name, price: lunch.price });
                     }}
                     className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-6 md:p-8 ${
                       isSelected
@@ -534,7 +532,6 @@ export default function Catering() {
                     whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(168, 85, 247, 0.15)" }}
                     onClick={() => {
                       setSelectedEveningMenu(evening.id);
-                      set("evening", { id: evening.id, name: evening.name, price: evening.price });
                     }}
                     className={`relative group rounded-2xl overflow-hidden text-left transition-all duration-300 p-8 ${
                       isSelected
