@@ -336,6 +336,46 @@ export default function Summary() {
             </div>
           </div>
         </motion.div>
+
+        {/* NAVIGATION BUTTONS */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="bg-white/50 backdrop-blur border border-border/30 rounded-3xl p-8 space-y-4"
+        >
+          <p className="text-sm uppercase tracking-widest text-muted-foreground font-medium mb-4">Edit Your Selections</p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <Button 
+              onClick={() => go("/plans")} 
+              variant="outline"
+              className="rounded-full h-11 font-medium border-primary/20 hover:border-primary/50 text-primary hover:bg-primary/5"
+            >
+              🎥 Go to Photography →
+            </Button>
+            <Button 
+              onClick={() => go("/decoration")} 
+              variant="outline"
+              className="rounded-full h-11 font-medium border-primary/20 hover:border-primary/50 text-primary hover:bg-primary/5"
+            >
+              🎨 Go to Decoration →
+            </Button>
+            <Button 
+              onClick={() => go("/catering")} 
+              variant="outline"
+              className="rounded-full h-11 font-medium border-primary/20 hover:border-primary/50 text-primary hover:bg-primary/5"
+            >
+              🍽️ Go to Catering →
+            </Button>
+            <Button 
+              onClick={() => go("/addons")} 
+              variant="outline"
+              className="rounded-full h-11 font-medium border-primary/20 hover:border-primary/50 text-primary hover:bg-primary/5"
+            >
+              ✨ Go to Add-ons →
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
     </>

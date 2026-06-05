@@ -107,7 +107,7 @@ export default function Addons() {
         ))}
         <div className="text-center">
           <Button onClick={() => go("/summary")} className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8">
-            View Booking Summary →
+            📋 Go to Summary Page →
           </Button>
         </div>
       </div>

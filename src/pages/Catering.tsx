@@ -616,7 +616,7 @@ export default function Catering() {
               onClick={handleContinue}
               className="rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:opacity-90 px-8 py-4 font-bold uppercase tracking-wider h-auto shadow-lg whitespace-nowrap"
             >
-              Add-ons →
+              ✨ Go to Add-ons Section →
             </Button>
           </div>
         </div>

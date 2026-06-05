@@ -3,6 +3,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SectionTitle from "@/components/SectionTitle";
 import GrandTotalCard from "@/components/GrandTotalCard";
@@ -85,6 +86,13 @@ export default function Availability() {
           <Button onClick={submit} size="lg" className="w-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold rounded-full h-14">
             Check & Continue →
           </Button>
+          <div className="flex gap-3 mt-4">
+            <Link to="/summary" className="flex-1">
+              <Button variant="outline" size="lg" className="w-full rounded-full h-14 border-2 border-primary text-primary hover:bg-primary/10">
+                📋 View Booking Summary
+              </Button>
+            </Link>
+          </div>
         </motion.div>
       </div>
       </section>

@@ -397,11 +397,11 @@ export default function Photography() {
             {state.photography ? "Ready to move forward?" : "Select a photography package to continue"}
           </p>
           <Button
-            onClick={() => state.photography && navigate("/decoration")}
+            onClick={() => state.photography ? go("/decoration") : toast.error("Please select a photography package first")}
             disabled={!state.photography}
             className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8"
           >
-            Continue to Decoration →
+            🎨 Go to Decoration Section →
           </Button>
         </div>
       </section>

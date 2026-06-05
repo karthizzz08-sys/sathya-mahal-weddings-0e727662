@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, Crown, Zap, Sparkles, Flame, Power } from "lucide-react";
+import { Check, Crown, Zap, Sparkles, Flame, Power, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionTitle from "@/components/SectionTitle";
 import GrandTotalCard from "@/components/GrandTotalCard";
@@ -120,6 +120,17 @@ export default function Plans() {
               </p>
             </motion.div>
           ))}
+        </div>
+
+        {/* Continue Button */}
+        <div className="mt-12 md:mt-16 text-center">
+          <Button 
+            onClick={() => state.plan ? go("/photography") : toast.error("Please select a plan first")}
+            disabled={!state.plan}
+            className="bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold rounded-full h-14 px-10 text-base font-semibold inline-flex items-center gap-2"
+          >
+            🎥 Go to Photography Section <ArrowRight className="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </section>

@@ -106,7 +106,7 @@ export default function Decoration() {
             {state.decoration.length === 0 ? "Select one or more decoration styles" : `${state.decoration.length} style(s) selected`}
           </p>
           <Button onClick={() => go("/catering")} className="rounded-full bg-gradient-gold text-primary-foreground hover:opacity-90 shadow-gold h-12 px-8">
-            Continue to Catering →
+            🍽️ Go to Catering Section →
           </Button>
         </div>
       </div>
