@@ -621,8 +621,9 @@ export default function Catering() {
         className="fixed bottom-0 left-0 right-0 bg-white border-t-2 border-purple-200 shadow-2xl z-40"
       >
         <div className="container py-4">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex gap-3 items-center">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            {/* Desktop Only - Catering Subtotal and View Summary */}
+            <div className="hidden md:flex gap-3 items-center">
               <div className="flex flex-col">
                 <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Catering Subtotal</span>
                 <span className="font-serif text-2xl font-bold text-purple-600">₹{cateringSubtotal.toLocaleString()}</span>
@@ -636,9 +637,15 @@ export default function Catering() {
               </Link>
             </div>
 
+            {/* Mobile Only - Catering Subtotal */}
+            <div className="md:hidden flex flex-col">
+              <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Catering Subtotal</span>
+              <span className="font-serif text-2xl font-bold text-purple-600">₹{cateringSubtotal.toLocaleString()}</span>
+            </div>
+
             <Button
               onClick={handleContinue}
-              className="rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:opacity-90 px-8 py-4 font-bold uppercase tracking-wider h-auto shadow-lg whitespace-nowrap"
+              className="rounded-2xl bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:opacity-90 px-8 py-4 font-bold uppercase tracking-wider h-auto shadow-lg whitespace-nowrap w-full md:w-auto"
             >
               ✨ Go to Add-ons Section →
             </Button>
