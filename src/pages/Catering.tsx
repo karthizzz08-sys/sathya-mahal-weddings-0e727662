@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ChefHat, CheckCircle2, Radio, Minus, Plus } from "lucide-react";
+import { ChefHat, CheckCircle2, Radio, Minus, Plus, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import GrandTotalCard from "@/components/GrandTotalCard";
 import { useBooking } from "@/context/BookingContext";
 import { useTransitionNav } from "@/hooks/useTransitionNav";
@@ -599,17 +600,14 @@ export default function Catering() {
       >
         <div className="container py-4">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex-1">
-              <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">Total Event Cost</p>
-              <div className="flex items-baseline gap-2">
-                <span className="font-serif text-4xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">
-                  ₹{total.toLocaleString()}
-                </span>
-                <span className="text-sm text-muted-foreground">for {guestQuantity} guests</span>
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Catering: ₹{cateringSubtotal.toLocaleString()} (Morning: ₹{morningTotal.toLocaleString()} • Lunch: ₹{lunchTotal.toLocaleString()} • Evening: ₹{eveningTotal.toLocaleString()})
-              </p>
+            <div className="flex gap-3">
+              <Link
+                to="/summary"
+                className="rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 px-6 py-4 font-bold uppercase tracking-wider h-auto shadow-lg transition-all flex items-center gap-2 whitespace-nowrap"
+              >
+                <FileText className="h-5 w-5" />
+                📋 View Booking Summary
+              </Link>
             </div>
 
             <Button
