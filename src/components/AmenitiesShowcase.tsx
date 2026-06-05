@@ -35,7 +35,7 @@ const amenities: AmenityItem[] = [
     id: "dining",
     title: "Find My Match",
     image: matrimonyImg,
-    url: "https://chettiar-connect-soulmate.lovable.app",
+    url: "https://chettiar-connect-9a24a9d5.vercel.app/",
   },
 ];
 
